@@ -24,6 +24,7 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.gruppo = request.user.profile.gruppo
             post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
@@ -47,11 +48,13 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            user = form.save()
             user.is_active = False
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.gruppo = form.cleaned_data.get('gruppo')
             user.save()
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Activate Your Account'
             message = render_to_string('blog/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
