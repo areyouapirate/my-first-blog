@@ -17,14 +17,15 @@
 			<div class="page-header">
 				{% if user.is_authenticated %}
 					<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-					<a href="{% url 'logout' %}">{{ user.username }}</a>
+					<a href="/your_profile">{{ user.username }}</a>
 				{% endif %}
-				<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-				<a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+				<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-in"></span></a>
+				<a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-registration-mark"></span></a>
 				<picture>
 				<source media="(min-width: 540px)" srcset="{% static 'img/agesci-logo-80.png' %}">
 				<img src="{% static 'img/agesci-logo-bn.png' %}" alt="AGESCI" class="img-responsive" align="middle" >				</picture>
 				<h1><a href="/">Zona Pistoia</a></h1>
+				<a href="/inscr/new">Nuova iscrizione</a>
 			</div>
 			<div class="content container">
 				<div class="row">

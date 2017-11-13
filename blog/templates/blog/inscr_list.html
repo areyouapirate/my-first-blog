@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for Inscription in inscr %}
+        <div class="post">
+            <div class="date">
+                {{ inscr.published_date }}
+            </div>
+            <p><a href="{% url 'inscr_detail' pk=Inscription.pk %}">{{ Inscription.fn_child }} {{ Inscription.sn_child }}</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}

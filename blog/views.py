@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post
-from .forms import PostForm, SignUpForm
+from .models import Post, Inscription
+from .forms import PostForm, SignUpForm, InscrForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -18,6 +18,7 @@ def post_list(request):
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	return render(request, 'blog/post_detail.html', {'post': post})
+@login_required(login_url='/login/')
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -31,9 +32,10 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+@login_required(login_url='/login/')
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
+    if (request.method == "POST" and post.author == request.user):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
@@ -49,9 +51,9 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.is_active = False
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.gruppo = form.cleaned_data.get('gruppo')
+            user.is_active = False
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your Account'
@@ -78,9 +80,35 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.profile.email_confirmed = True
+        user.registration_date = timezone.now()
         user.save()
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
         return redirect('/')
     else:
         return render(request, 'blog/account_activation_invalid.html')
+@login_required(login_url='/login/')
+def inscr_new(request):
+    if request.method == "POST":
+        form = InscrForm(request.POST)
+        if form.is_valid():
+            inscr = form.save(commit=False)
+            inscr.author = request.user
+            inscr.published_date = timezone.now()
+            inscr.save()
+            return redirect('inscr_detail', pk=inscr.pk)
+    else:
+        form = InscrForm()
+    return render(request, 'blog/inscr_edit.html', {'form': form})
+def inscr_detail(request, pk):
+	inscr = get_object_or_404(Inscription, pk=pk)
+	if inscr.author == request.user:
+		return render(request, 'blog/inscr_detail.html', {'inscr': inscr})
+	else:
+		return redirect('/')
+def profile_detail(request):
+    user = get_object_or_404(User, username=request.user)
+    return render(request, 'blog/profile_detail.html', {'user': user})
+def inscr_list(request):
+    inscr = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
+    return render(request, 'blog/inscr_list.html', {'inscr': inscr})
