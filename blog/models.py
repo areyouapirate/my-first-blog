@@ -15,7 +15,7 @@ class Inscription(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey('auth.User')
     def __str__(self):
-        return self.published_date
+        return '%s %s %s %s' % (self.published_date, self.fn_child, self.sn_child, self.dob_child)
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email_confirmed = models.BooleanField(default=False)

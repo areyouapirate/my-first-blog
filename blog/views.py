@@ -11,7 +11,8 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from .filters import InscriptionFilter
+import datetime
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -53,6 +54,7 @@ def signup(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.gruppo = form.cleaned_data.get('gruppo')
+            user.profile.birth_date = form.cleaned_data.get('birth_date')
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -94,7 +96,7 @@ def inscr_new(request):
         if form.is_valid():
             inscr = form.save(commit=False)
             inscr.author = request.user
-            inscr.published_date = timezone.now()
+            inscr.published_date = datetime.datetime.now()
             inscr.save()
             return redirect('inscr_detail', pk=inscr.pk)
     else:
@@ -102,7 +104,7 @@ def inscr_new(request):
     return render(request, 'blog/inscr_edit.html', {'form': form})
 def inscr_detail(request, pk):
 	inscr = get_object_or_404(Inscription, pk=pk)
-	if inscr.author == request.user:
+	if (request.user.is_staff and request.user.profile.gruppo == inscr.first_choice or inscr.author == request.user or request.user.is_staff):
 		return render(request, 'blog/inscr_detail.html', {'inscr': inscr})
 	else:
 		return redirect('/')
@@ -110,5 +112,19 @@ def profile_detail(request):
     user = get_object_or_404(User, username=request.user)
     return render(request, 'blog/profile_detail.html', {'user': user})
 def inscr_list(request):
-    inscr = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
-    return render(request, 'blog/inscr_list.html', {'inscr': inscr})
+    if request.user.is_superuser:
+        inscr_origin3 = Inscription.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+        inscr_filter3 = InscriptionFilter(request.GET, queryset=inscr_origin3)
+        return render(request, 'blog/inscr_list.html', {'filter3': inscr_filter3})
+    elif request.user.is_staff:
+        inscr_origin1 = Inscription.objects.filter(published_date__lte=timezone.now(), first_choice=request.user.profile.gruppo).order_by('published_date')
+        inscr_filter1 = InscriptionFilter(request.GET, queryset=inscr_origin1)
+        inscr_origin2 = Inscription.objects.filter(published_date__lte=timezone.now(), second_choice=request.user.profile.gruppo).order_by('published_date')
+        inscr_filter2 = InscriptionFilter(request.GET, queryset=inscr_origin2)
+        inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
+        inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
+        return render(request, 'blog/inscr_list.html', {'filter0': inscr_filter0, 'filter1': inscr_filter1, 'filter2': inscr_filter2})
+    else:
+        inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
+        inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
+        return render(request, 'blog/inscr_list.html', {'filter0': inscr_filter0})
