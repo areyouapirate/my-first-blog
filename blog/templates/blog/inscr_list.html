@@ -1,10 +1,16 @@
 {% extends 'blog/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
+
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="features_list">
+
 {% if filter1.qs %}
   <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
+      <h2 style="margin-top: 0">Filtro</h2>
       <div class="row">
         <div class="form-group col-sm-4 col-md-3">
         	Nome
@@ -20,14 +26,14 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
+        <span class="glyphicon glyphicon-search"></span> Cerca
       </button>
     </div>
   </form>
 {% elif filter0.qs %}
    <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
+      <h2 style="margin-top: 0">Filtro</h2>
       <div class="row">
         <div class="form-group col-sm-4 col-md-3">
         	Nome
@@ -43,14 +49,14 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
+        <span class="glyphicon glyphicon-search"></span> Cerca
       </button>
     </div>
   </form>
 {% elif filter2.qs %}
       <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
+      <h2 style="margin-top: 0">Filtro</h2>
       <div class="row">
         <div class="form-group col-sm-4 col-md-3">
         	Nome
@@ -66,14 +72,14 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
+        <span class="glyphicon glyphicon-search"></span> Cerca
       </button>
     </div>
   </form>
 {% elif filter3.qs %}
   <form method="get">
     <div class="well">
-      <h4 style="margin-top: 0">Filter</h4>
+      <h2 style="margin-top: 0">Filter</h2>
       <div class="row">
         <div class="form-group col-sm-4 col-md-3">
         	Nome
@@ -89,7 +95,7 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">
-        <span class="glyphicon glyphicon-search"></span> Search
+        <span class="glyphicon glyphicon-search"></span> Cerca
       </button>
     </div>
   </form>
@@ -97,26 +103,26 @@
   <div> Nessun risultato trovato</div>
 {% endif %}
 {% if filter1.qs %}
-    <h2>Prime scelte</h2>
+    <h1>Prime scelte</h1>
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Data di nascita</th>
+        <th>Anno</th>
         <th>Nome</th>
         <th>Cognome</th>
         <th>Prima scelta</th>
-        <th>Seconda scelta</th>
+        <th class="col_3">Seconda scelta</th>
         <th>Dettagli</th>
       </tr>
     </thead>
     <tbody>
       {% for Inscription in filter1.qs %}
         <tr>
-          <td>{{ Inscription.dob_child }}</td>
+          <td>{{ Inscription.dob_child.year }}</td>
           <td>{{ Inscription.fn_child }}</td>
           <td>{{ Inscription.sn_child }}</td>
           <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
+          <td class="col_3">{{ Inscription.second_choice }}</td>
           <td><a href="{% url 'inscr_detail' pk=Inscription.pk %}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
         </tr>
       {% empty %}
@@ -128,26 +134,26 @@
     </table>
 {% endif %}
 {% if filter2.qs %}
-    <h2>Seconde scelte</h2>
+    <h1>Seconde scelte</h1>
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Data di nascita</th>
+        <th>Anno</th>
         <th>Nome</th>
         <th>Cognome</th>
         <th>Prima scelta</th>
-        <th>Seconda scelta</th>
+        <th class="col_3">Seconda scelta</th>
         <th>Dettagli</th>
       </tr>
     </thead>
     <tbody>
       {% for Inscription in filter2.qs %}
         <tr>
-          <td>{{ Inscription.dob_child }}</td>
+          <td>{{ Inscription.dob_child.year }}</td>
           <td>{{ Inscription.fn_child }}</td>
           <td>{{ Inscription.sn_child }}</td>
           <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
+          <td class="col_3">{{ Inscription.second_choice }}</td>
           <td><a href="{% url 'inscr_detail' pk=Inscription.pk %}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
         </tr>
       {% empty %}
@@ -159,26 +165,26 @@
     </table>
 {% endif %}
 {% if filter0.qs %}
-	<h2>Iscrizioni personali</h2>
+	<h1>Iscrizioni personali</h1>
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Data di nascita</th>
+        <th>Anno</th>
         <th>Nome</th>
         <th>Cognome</th>
         <th>Prima scelta</th>
-        <th>Seconda scelta</th>
+        <th class="col_3">Seconda scelta</th>
         <th>Dettagli</th>
       </tr>
     </thead>
     <tbody>
       {% for Inscription in filter0.qs %}
         <tr>
-          <td>{{ Inscription.dob_child }}</td>
+          <td>{{ Inscription.dob_child.year }}</td>
           <td>{{ Inscription.fn_child }}</td>
           <td>{{ Inscription.sn_child }}</td>
           <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
+          <td class="col_3">{{ Inscription.second_choice }}</td>
           <td><a href="{% url 'inscr_detail' pk=Inscription.pk %}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
         </tr>
       {% empty %}
@@ -190,26 +196,26 @@
     </table>
 {% endif %}
 {% if filter3.qs %}
-    <h2>Tutte le iscrizioni</h2>
+    <h1>Tutte le iscrizioni</h1>
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Data di nascita</th>
+        <th>Anno</th>
         <th>Nome</th>
         <th>Cognome</th>
         <th>Prima scelta</th>
-        <th>Seconda scelta</th>
+        <th class="col_3">Seconda scelta</th>
         <th>Dettagli</th>
       </tr>
     </thead>
     <tbody>
       {% for Inscription in filter3.qs %}
         <tr>
-          <td>{{ Inscription.dob_child }}</td>
+          <td>{{ Inscription.dob_child.year }}</td>
           <td>{{ Inscription.fn_child }}</td>
           <td>{{ Inscription.sn_child }}</td>
           <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
+          <td class="col_3">{{ Inscription.second_choice }}</td>
           <td><a href="{% url 'inscr_detail' pk=Inscription.pk %}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
         </tr>
       {% empty %}
@@ -220,4 +226,8 @@
     </tbody>
     </table>
 {% endif %}
+
+    </div>
+  </div>
+</section>
 {% endblock %}

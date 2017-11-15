@@ -1,7 +1,9 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Ciao {{ user.username }},
+benvenuto nel portale che riunisce tutti i gruppi scout AGESCI della zona di pistoia!
 
-Please click on the link below to confirm your registration:
+Questo è il tuo link per attivare l'account:
 
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% endautoescape %}
+

@@ -1,35 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 {% load staticfiles %}
-<html lang="en">
-    <head>
-        <title>Zona Pistoia</title>
-		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-		<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    </head>
-	<body>
-		<div class="page-header">
-			{% if user.is_authenticated %}
-				<a href="{% url 'post_new' %}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
-				<a href="/your_profile" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> {{ user.username }} </a>
-				<a href="/inscr/new" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nuova iscrizione</a>
-			{% endif %}
-			<a href="{% url 'login' %}" class="btn btn-default" style="float: right;"><span class="glyphicon glyphicon-log-in"></span> Login </a>
-			<a href="{% url 'signup' %}" class="btn btn-default" style="float: right;"><span class="glyphicon glyphicon-registration-mark"></span> Signup </a>
-			<h1><a href="/">Zona Pistoia</a></h1>
-		</div>
-		<div class="content container">
-			<div class="row">
-				<div class="col-sm-10">
-					{% block content %}
-					{% endblock %}
-				</div>
+<html lang="en-us">
+<head>
+	<!--  App Title  -->
+	<title>Scout AGESCI - Zona Pistoia</title>
+	<!--  App Description  -->
+	<meta name="description" content="Sito di riferimento per i gruppi scout Agesci della zona Pistoia."/>
+	<meta charset="utf-8">
+	<meta name="author" content="Zona Pistoia">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/owl.transitions.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+
+	
+	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/ajaxchimp.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/scrollTo.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/wow.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/parallax.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/nicescroll.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+	
+	<!--  Header Section  -->
+	<header>
+		<div class="container">
+			<div class="logo pull-left animated wow fadeInLeft">
+				<a href="/"><img src="{% static 'img/logo5.png' %}" alt="" title=""></a>
 			</div>
+			<nav class="pull-left">
+				<li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="#">Chi siamo</a></li>
+				<li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#">Dove siamo</a></li>
+				<li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#">Contatti</a></li>
+			</nav>
+			{% if user.is_authenticated %}
+			<nav class="pull-right">
+					<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="/your_profile"> {{ user.username }} <img src="{% static 'img/user1.png' %}" alt="" title=""></a></li>
+			</nav>
+			{% else %}
+			<nav class="pull-right">
+				<div>
+					<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="{% url 'signup' %}"> Registrati </a></li>
+				</div>
+				<div>
+					<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="{% url 'login' %}"> Login </a></li>
+				</div>
+			</nav>
+			{% endif %}
+			<span class="burger_icon">menu</span>
 		</div>
-	</body>
+	</header>
+	<!--  End Header Section  -->
+
+
+	{% block content %}
+	{% endblock %}
+
+
+</body>
 </html>

@@ -1,10 +1,24 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"><span class="glyphicon glyphicon-registration-mark"></span></button>
-  </form>
+
+
+
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="features_list">
+                <h2>Sign up</h2>
+				<form method="post">
+    				{% csrf_token %}
+    				{{ form.as_p }}
+    				<button type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button>
+  				</form>
+            </div>
+        </div>
+    </section>
+
+
+
+
 {% endblock %}
