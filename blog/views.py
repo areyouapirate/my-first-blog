@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .tokens import account_activation_token
+from .tokens import account_activation_token, post_token
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .filters import InscriptionFilter
@@ -23,20 +23,57 @@ def post_detail(request, pk):
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
-        if form.is_valid():
+        if (form.is_valid() and request.user.is_staff):
             post = form.save(commit=False)
             post.author = request.user
             post.gruppo = request.user.profile.gruppo
             post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
+        elif form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.gruppo = request.user.profile.gruppo
+            post.save()
+            target = User.objects.filter(profile__gruppo=post.gruppo, is_staff=True)
+            if not target:
+                target = User.objects.filter(is_staff=True)
+            for user in target:
+                current_site = get_current_site(request)
+                subject = 'Richiesta post'
+                message = render_to_string('blog/post_request_email.html', {
+                    'user': request.user,
+                    'domain': current_site.domain,
+                    'title': post.title,
+                    'text': post.text,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'pid': urlsafe_base64_encode(force_bytes(post.pk)),
+                    'token': post_token.make_token(user),
+                    })
+                user.email_user(subject, message)
+            return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+def post_confirm(request, uidb64, pidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        pid = force_text(urlsafe_base64_decode(pidb64))
+        user = User.objects.get(pk=uid)
+        post=Post.objects.get(pk=pid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and post_token.check_token(user, token):
+        post.published_date = timezone.now()
+        post.approval = user.username
+        post.save()
+        return redirect('/')
+    else:
+        return render(request, 'blog/account_activation_invalid.html')
 @login_required(login_url='/login/')
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if (request.method == "POST" and post.author == request.user):
+    if (request.method == "POST" and post.gruppo == request.user.gruppo and request.user.is_staff or request.user.is_superuser and request.method == "POST"):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)

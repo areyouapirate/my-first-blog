@@ -1,0 +1,16 @@
+{% autoescape off %}
+Ciao, l'utente {{ user.username }} richiede l'approvazione per pubblicare un post!
+Il contenuto che  {{ user.username }} intende postare è il seguente:
+
+Titolo:
+{{ title }}
+
+Contenuto:
+{{ text }}
+
+Se vuoi consentire la pubblucazione di questo post apri il seguente link entro 7 giorni:
+
+http://{{ domain }}{% url 'post_confirm' uidb64=uid pidb64=pid token=token %}
+{% endautoescape %}
+
+Nel caso tu non voglia dare il permesso per la pubblicazione del post puoi semplicemente ignorare questa mail!
