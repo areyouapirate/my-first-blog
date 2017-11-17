@@ -8,6 +8,9 @@ Titolo:
 Contenuto:
 {{ text }}
 
+Immagine allegata:
+http://{{ domain }}{{ image }}
+
 Se vuoi consentire la pubblucazione di questo post apri il seguente link entro 7 giorni:
 
 http://{{ domain }}{% url 'post_confirm' uidb64=uid pidb64=pid token=token %}

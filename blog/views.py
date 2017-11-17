@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
 from .models import Post, Inscription
 from .forms import PostForm, SignUpForm, InscrForm
@@ -13,8 +14,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .filters import InscriptionFilter
 import datetime
+
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
@@ -22,7 +24,7 @@ def post_detail(request, pk):
 @login_required(login_url='/login/')
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if (form.is_valid() and request.user.is_staff):
             post = form.save(commit=False)
             post.author = request.user
@@ -46,6 +48,7 @@ def post_new(request):
                     'domain': current_site.domain,
                     'title': post.title,
                     'text': post.text,
+                    'image': post.img.url,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'pid': urlsafe_base64_encode(force_bytes(post.pk)),
                     'token': post_token.make_token(user),
@@ -73,7 +76,7 @@ def post_confirm(request, uidb64, pidb64, token):
 @login_required(login_url='/login/')
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if (request.method == "POST" and post.gruppo == request.user.gruppo and request.user.is_staff or request.user.is_superuser and request.method == "POST"):
+    if (request.method == "POST" and post.gruppo == request.user.profile.gruppo and request.user.is_staff or request.user.is_superuser and request.method == "POST"):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)

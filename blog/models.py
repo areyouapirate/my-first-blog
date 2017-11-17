@@ -38,6 +38,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     approval = models.TextField()
+    img = models.FileField(upload_to='post_img/', blank=True, null=True)
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(

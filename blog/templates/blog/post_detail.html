@@ -1,16 +1,37 @@
 {% extends 'blog/base.html' %}
+{% block extra_head_content  %}
+{% if post.img %}
+<style>
+.hero2{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: url('{{ post.img.url }}') no-repeat fixed center center;   
+    background-size: cover;
+}
+</style>
+{% endif %}
+{% endblock %}
 {% block content %}
-    <section class="hero" id="hero">
+{% if post.img %}
+    <section class="hero2" id="hero2">
         <div class="container">
             <div class="caption">
                 <h1 class="text-uppercase  animated wow fadeInLeft">{{ post.title }}</h1>
             </div>          
         </div>
     </section>
+{% endif %}
 <!--  App Features Section  -->
     <section class="about" id="about">
         <div class="container">
             <div class="features_list">
+                {% if not post.img %}
+                    <h1 class="text-uppercase  animated wow fadeInLeft">{{ post.title }}</h1>
+                {% endif %}
+
+
         <p id="full">{{ post.text|linebreaksbr }}</p>   
         <p id="full">{{ post.approval }}</p>
             </div>

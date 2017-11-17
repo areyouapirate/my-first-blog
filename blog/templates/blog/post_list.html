@@ -13,8 +13,15 @@
 			<div class="features_list">
 			{% for post in posts %}
 				<div class="col-sm-4 col-md-4 details animated wow fadeInRight" data-wow-delay="0s">
-					<img src="img/f_icon1.png" alt="" title="">
-					<h1 class="text-uppercase"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+					{% if post.img %}
+					<div class="container"><a class="c1" href="{% url 'post_detail' pk=post.pk %}">
+					<img class="pre" src="{{ post.img.url }}" alt="" title="">
+					<h1 class="text-uppercase"><a class="c1" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+					</div>
+					{% endif %}
+					{% if not post.img %}
+					<h1 class="text-uppercase"><a class="c2" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+					{% endif %}
 					<p> {{ post.text }} </p>
 				</div>
 			{% endfor %}	

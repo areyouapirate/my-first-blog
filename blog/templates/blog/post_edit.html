@@ -5,11 +5,12 @@
   <div class="container">
     <div class="features_list">
     <h1>New post</h1>
-    <form method="POST">{% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
     </div>
   </div>
 </section>
+
 {% endblock %}

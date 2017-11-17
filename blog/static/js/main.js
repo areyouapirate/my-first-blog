@@ -59,6 +59,10 @@ $(document).ready(function(){
 
 
 
+	//parallax effect initialization
+	$('.hero2').parallax("50%", 0.3);
+
+
 
 
 

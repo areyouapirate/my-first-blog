@@ -20,10 +20,10 @@ MY_CHOICES = (
 now = datetime.datetime.now()
 current_year = now.year
 class PostForm(forms.ModelForm):
-
+    img = forms.FileField(required=False)
     class Meta:
         model = Post
-        fields = ('title', 'text',)
+        fields = ('title', 'text', 'img',)
 		
 
 class SignUpForm(UserCreationForm):
