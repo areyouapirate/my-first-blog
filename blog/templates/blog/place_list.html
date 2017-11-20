@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="features_list">
+
+   <form method="get">
+    <div class="well">
+      <h2 style="margin-top: 0">Filtro</h2>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+        	Capienza
+          {% render_field filter0.form.capacity class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+        	Tipo
+          {% render_field filter0.form.typ class="form-control" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+        	Riscaldamento
+          {% render_field filter0.form.heat class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Cerca
+      </button>
+    </div>
+  </form>
+{% if not filter0.qs %}
+  <div> Nessun risultato trovato</div>
+{% endif %}
+	<h1>Lista terreni e case per campi</h1>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Capienza</th>
+        <th>Tipo</th>
+        <th class="col_3">Riscaldamento</th>
+        <th>Località</th>
+        <th class="col_3">Costi</th>
+        <th>Dettagli</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Place in filter0.qs %}
+        <tr>
+          <td>{{ Place.capacity }}</td>
+          <td>{{ Place.typ }}</td>
+          <td class="col_3">{{ Place.heat }}</td>
+          <td>{{ Place.where }}</td>
+          <td class="col_3">{{ Place.cost }}</td>
+          <td><a href="{% url 'place_detail' pk=Place.pk %}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+    <a href="{% url 'place_new' %}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Aggiungi</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

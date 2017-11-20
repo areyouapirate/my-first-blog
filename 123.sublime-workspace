@@ -11,8 +11,8 @@
 			"file": "blog/forms.py",
 			"settings":
 			{
-				"buffer_size": 1367,
-				"line_ending": "Windows"
+				"buffer_size": 1640,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -48,8 +48,8 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/gabri/django/my-first-blog",
-		"/C/Users/gabri/django/my-first-blog/blog"
+		"/home/gabri/django/my-first-blog",
+		"/home/gabri/django/my-first-blog/blog"
 	],
 	"file_history":
 	[
@@ -99,15 +99,15 @@
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 1367,
+						"buffer_size": 1640,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								664,
-								664
+								0,
+								0
 							]
 						],
 						"settings":
@@ -117,7 +117,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
-from .models import Post, Inscription
-from .forms import PostForm, SignUpForm, InscrForm
+from .models import Post, Inscription, Place
+from .forms import PostForm, SignUpForm, InscrForm, PlaceForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,15 +12,20 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token, post_token
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .filters import InscriptionFilter
+from .filters import InscriptionFilter, PlaceFilter
 import datetime
+
+"""
+POST ENVIRONMENT
+
+"""
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 def post_detail(request, pk):
-	post = get_object_or_404(Post, pk=pk)
-	return render(request, 'blog/post_detail.html', {'post': post})
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 @login_required(login_url='/login/')
 def post_new(request):
     if request.method == "POST":
@@ -87,6 +92,18 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+
+
+
+"""
+LOGIN-SIGNUP ENVIRONMENT
+
+"""
+
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -129,6 +146,17 @@ def activate(request, uidb64, token):
         return redirect('/')
     else:
         return render(request, 'blog/account_activation_invalid.html')
+def profile_detail(request):
+    user = get_object_or_404(User, username=request.user)
+    return render(request, 'blog/profile_detail.html', {'user': user})
+
+
+"""
+INSCRIPTIONS ENVIRONMENT
+
+"""
+
+
 @login_required(login_url='/login/')
 def inscr_new(request):
     if request.method == "POST":
@@ -143,14 +171,11 @@ def inscr_new(request):
         form = InscrForm()
     return render(request, 'blog/inscr_edit.html', {'form': form})
 def inscr_detail(request, pk):
-	inscr = get_object_or_404(Inscription, pk=pk)
-	if (request.user.is_staff and request.user.profile.gruppo == inscr.first_choice or inscr.author == request.user or request.user.is_staff):
-		return render(request, 'blog/inscr_detail.html', {'inscr': inscr})
-	else:
-		return redirect('/')
-def profile_detail(request):
-    user = get_object_or_404(User, username=request.user)
-    return render(request, 'blog/profile_detail.html', {'user': user})
+    inscr = get_object_or_404(Inscription, pk=pk)
+    if (request.user.is_staff and request.user.profile.gruppo == inscr.first_choice or inscr.author == request.user or request.user.is_staff):
+        return render(request, 'blog/inscr_detail.html', {'inscr': inscr})
+    else:
+        return redirect('/')
 def inscr_list(request):
     if request.user.is_superuser:
         inscr_origin3 = Inscription.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -168,3 +193,32 @@ def inscr_list(request):
         inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
         inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
         return render(request, 'blog/inscr_list.html', {'filter0': inscr_filter0})
+
+
+"""
+PLACES ENVIRONMENT
+
+"""
+
+@login_required(login_url='/login/')
+def place_new(request):
+    if request.method == "POST":
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            place = form.save(commit=False)
+            place.author = request.user
+            place.published_date = datetime.datetime.now()
+            place.save()
+            return redirect('place_detail', pk=place.pk)
+    else:
+        form = PlaceForm()
+    return render(request, 'blog/place_edit.html', {'form': form})
+
+def place_detail(request, pk):
+    place = get_object_or_404(Place, pk=pk)
+    return render(request, 'blog/place_detail.html', {'place': place})
+
+def place_list(request):
+    place_origin0 = Place.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    place_filter0 = PlaceFilter(request.GET, queryset=place_origin0)
+    return render(request, 'blog/place_list.html', {'filter0': place_filter0})

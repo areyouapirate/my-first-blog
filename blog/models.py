@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.gis.db import models
 class Inscription(models.Model):
     fn_parent = models.CharField(max_length=200)
     sn_parent = models.CharField(max_length=200)
@@ -52,4 +53,18 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-# Create your models here.
+class Place(models.Model):
+    typ = models.CharField(max_length=200)
+    where = models.CharField(max_length=200)
+    coordinates = models.PointField()
+    heat = models.CharField(max_length=200)
+    capacity = models.IntegerField(max_length=200)
+    cost = models.CharField(max_length=200)
+    last_group = models.CharField(max_length=200)
+    contacts = models.CharField(max_length=200)
+    description = models.TextField()
+    published_date = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey('auth.User')
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()

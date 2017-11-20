@@ -40,8 +40,20 @@ INSTALLED_APPS = (
     'blog',
     'widget_tweaks',
     'django_filters',
+    'django.contrib.gis',
+    'mapwidgets',
 )
-
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 12),
+        ("mapCenterLocationName", "pistoia"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'it'}}),
+        ("markerFitZoom", 12),
+        ("language", "IT"),
+    ),
+    "LANGUAGE": "IT",
+    "GOOGLE_MAP_API_KEY": "AIzaSyCRU4ZZiIBGj2wkuA-tl6jEl4_i-ndD7DI"
+}
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,10 +91,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

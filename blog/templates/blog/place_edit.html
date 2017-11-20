@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+{{ form.media }}
+{% block content %}
+<section class="about" id="about">
+  <div class="container">
+    <div class="features_list">
+  <form method="POST">{% csrf_token %}
+    <div class="well">
+      <h4 style="margin-top: 0">Nuovo posto</h4>
+      <div class="row">
+        <div class="form-group col-sm-5 col-md-4">
+        	Località          
+          {% render_field form.where class="form-control" %}
+        </div>
+        <div class="form-group col-sm-5 col-md-4">
+        	Tipo
+          {% render_field form.typ class="form-control" %}
+        </div>
+        <div class="form-group col-sm-5 col-md-4">
+        	Riscaldamento
+          {% render_field form.heat class="form-control" %}
+        </div>
+        <div class="form-group col-sm-5 col-md-4">
+        	Posti letto
+          {% render_field form.capacity class="form-control" %}
+        </div>
+        <div class="form-group col-sm-5 col-md-4">
+        	Costi
+          {% render_field form.cost class="form-control" %}
+        </div>
+      </div>
+        <div class="form-group col-sm-5 col-md-4">
+          Ultimo gruppo che ha visitato il posto
+          {% render_field form.last_group class="form-control" %}
+        </div>
+      <div class="row">
+        <div class="form-group col-sm-5 col-md-4">
+        	Contatti
+          {% render_field form.contacts class="form-control" %}
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+        	Descrizione
+          {% render_field form.description class="form-control" %}
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+          Coordinate
+          {% render_field form.coordinates class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="save btn btn-default">Save</button>
+    </div>
+  </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
