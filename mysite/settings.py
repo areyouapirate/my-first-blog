@@ -95,9 +95,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
 SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
-
+"""
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Internationalization
