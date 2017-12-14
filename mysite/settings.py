@@ -123,7 +123,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'
 
-"""
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'agesci.zona.pistoia@gmail.com'
@@ -133,3 +133,4 @@ DEFAULT_FROM_EMAIL = 'agesci.zona.pistoia@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 """
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+"""
