@@ -4,14 +4,36 @@ $(function () {
   $("#id_img").change(function () {
     if (this.files && this.files[0]) {
       var reader = new FileReader();
+      $image.cropper("destroy");
       reader.onload = function (e) {
         $("#image").attr("src", e.target.result);
         $("#modalCrop").modal("show");
+        $("#mod_butt").show();
+        $("#rm_butt").show();
+        $(".preview").show();
       }
       reader.readAsDataURL(this.files[0]);
     }
   });
 
+  $(".js-img-modify").click(function () {
+    if ($("#id_img")[0].files && $("#id_img")[0].files[0]) {
+      var reader = new FileReader();
+      $image.cropper("destroy");
+      reader.onload = function (e) {
+        $("#image").attr("src", e.target.result);
+        $("#modalCrop").modal("show");
+      }
+      reader.readAsDataURL($("#id_img")[0].files[0]);
+    }
+  });
+
+  $(".js-img-remove").click(function () {
+    var $ig = $('#id_img');
+   $ig.wrap('<form>').closest('form').get(0).reset();
+   $ig.unwrap();
+   $(".preview").hide();
+  });
 
   /* SCRIPTS TO HANDLE THE CROPPER BOX */
   var $image = $("#image");
@@ -21,8 +43,9 @@ $(function () {
     $image.cropper({
       viewMode: 1,
       aspectRatio: 22/10,
-      minCropBoxWidth: 1700,
-      minCropBoxHeight: 760,
+      minCropBoxWidth: 283,
+      minCropBoxHeight: 126,
+      preview: '.preview',
       ready: function () {
         $image.cropper("setCanvasData", canvasData);
         $image.cropper("setCropBoxData", cropBoxData);
@@ -31,7 +54,11 @@ $(function () {
   }).on("hidden.bs.modal", function () {
     cropBoxData = $image.cropper("getCropBoxData");
     canvasData = $image.cropper("getCanvasData");
-    $image.cropper("destroy");
+    var cropData = $image.cropper("getData");
+    $("#id_x").val(cropData["x"]);
+    $("#id_y").val(cropData["y"]);
+    $("#id_height").val(cropData["height"]);
+    $("#id_width").val(cropData["width"]);
   });
 
   $(".js-zoom-in").click(function () {

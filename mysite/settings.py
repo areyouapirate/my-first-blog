@@ -124,12 +124,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'agesci.zona.pistoia@gmail.com'
-EMAIL_HOST_PASSWORD = 'ciccibilicci'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'agesci.zona.pistoia@gmail.com'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 """
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

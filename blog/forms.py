@@ -37,12 +37,15 @@ class PostForm(forms.ModelForm):
         y = self.cleaned_data.get('y')
         w = self.cleaned_data.get('width')
         h = self.cleaned_data.get('height')
-
-        image = Image.open(post.img)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        #resized_image = cropped_image.resize((1700, 760), Image.ANTIALIAS)
-        #resized_image.save(post.img.path)
-        cropped_image.save(post.img.path)
+        if x and y and w and h:
+            image = Image.open(post.img)
+            cropped_image = image.crop((x, y, w+x, h+y))
+            #resized_image = cropped_image.resize((1700, 760), Image.ANTIALIAS)
+            #resized_image.save(post.img.path)
+            cropped_image.save(post.img.path)
+        else:
+            image = Image.open(post.img)
+            image.save(post.img.path)
         return post
 
 """

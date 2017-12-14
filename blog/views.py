@@ -36,6 +36,7 @@ def post_new(request):
             post.author = request.user
             post.gruppo = request.user.profile.gruppo
             post.published_date = timezone.now()
+            post_x = form.cleaned_data.get('x')
             post.save()
             if post.img:
                 form.save_img()
@@ -109,6 +110,8 @@ def post_edit(request, pk):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
+            if post.img:
+                form.save_img()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)

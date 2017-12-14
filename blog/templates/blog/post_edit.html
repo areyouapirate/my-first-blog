@@ -52,13 +52,20 @@
                 {% render_field form.y %}
                 {% render_field form.width %}
                 {% render_field form.height %}
+
+                <button type="button" class="btn btn-default js-img-modify" id="mod_butt" style="margin-top: 10px; display: none;">Modifica</button>
+                <button type="button" class="btn btn-default js-img-remove" id="rm_butt" style="margin-top: 10px; display: none;">Rimuovi</button>
+            </div>
+            <div class="form-group col-sm-5 col-md-4">
+              <div class="preview" style="display: none; margin: 0 auto; overflow: hidden; width: 300px; height: 400px;"></div>
             </div>
           </div>
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-primary">Save</button>
         </div>
       </form>
     </div>  
-    <img src="" id="image" style="max-width: 100%;">
+    
+    
 </section>
 
 
