@@ -6,52 +6,125 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 import datetime
 from mapwidgets.widgets import GooglePointFieldWidget
+from PIL import Image
+from django.core.files import File
 
-MY_CHOICES = (
-    ('None', 'Nessuno'),
-    ('PT1', 'Pistoia 1'),
-    ('PT2', 'Pistoia 2'),
-    ('PT3', 'Pistoia 3'),
-    ('PT4', 'Pistoia 4'),
-    ('SG1', 'San Giorgio 1'),
-    ('QU1', 'Quarrata 1'),
-    ('MC1', 'Massa e Cozzile 1'),
-    ('CU1', 'Chiesina Uzzanese 1'),
-    ('UZ 1', 'Uzzano 1'), 
-)
-MY_CHOICES2 = (
-    ('CASA', 'CASA'),
-    ('TERRENO', 'TERRENO'),
-    ('CASA + TERRENO', 'CASA + TERRENO'),
-)
-MY_CHOICES3 = (
-    ('SI', 'SI'),
-    ('NO', 'NO '),
-)
-now = datetime.datetime.now()
-current_year = now.year
+
+
+
+
+"""
+POST Form
+
+"""
+
 class PostForm(forms.ModelForm):
-    img = forms.FileField(required=False)
+
+
+    x = forms.FloatField(required=False, widget=forms.HiddenInput())
+    y = forms.FloatField(required=False, widget=forms.HiddenInput())
+    width = forms.FloatField(required=False, widget=forms.HiddenInput())
+    height = forms.FloatField(required=False, widget=forms.HiddenInput())
+
     class Meta:
         model = Post
-        fields = ('title', 'text', 'img',)
-		
+        fields = ('title', 'text', 'img', 'x', 'y', 'width', 'height', )
+
+    def save_img(self):
+        post = super(PostForm, self).save()
+
+        x = self.cleaned_data.get('x')
+        y = self.cleaned_data.get('y')
+        w = self.cleaned_data.get('width')
+        h = self.cleaned_data.get('height')
+
+        image = Image.open(post.img)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        #resized_image = cropped_image.resize((1700, 760), Image.ANTIALIAS)
+        #resized_image.save(post.img.path)
+        cropped_image.save(post.img.path)
+        return post
+
+"""
+SIGUP Form
+
+"""
+
+
 
 class SignUpForm(UserCreationForm):
+    MY_CHOICES = (
+        ('None', 'Nessuno'),
+        ('PT1', 'Pistoia 1'),
+        ('PT2', 'Pistoia 2'),
+        ('PT3', 'Pistoia 3'),
+        ('PT4', 'Pistoia 4'),
+        ('SG1', 'San Giorgio 1'),
+        ('QU1', 'Quarrata 1'),
+        ('MC1', 'Massa e Cozzile 1'),
+        ('CU1', 'Chiesina Uzzanese 1'),
+        ('UZ 1', 'Uzzano 1'), 
+    )
+    now = datetime.datetime.now()
+    current_year = now.year
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     gruppo = forms.ChoiceField(choices=MY_CHOICES)
     birth_date = forms.DateField(widget=extras.SelectDateWidget(years=range(current_year - 90, current_year - 7)))
     class Meta:
         model = User
         fields = ('username', 'gruppo', 'first_name', 'last_name', 'birth_date', 'email', 'password1', 'password2', )
+
+
+"""
+INSCRIPTION Form
+
+"""
+
+
+
 class InscrForm(forms.ModelForm):
+    MY_CHOICES = (
+        ('None', 'Nessuno'),
+        ('PT1', 'Pistoia 1'),
+        ('PT2', 'Pistoia 2'),
+        ('PT3', 'Pistoia 3'),
+        ('PT4', 'Pistoia 4'),
+        ('SG1', 'San Giorgio 1'),
+        ('QU1', 'Quarrata 1'),
+        ('MC1', 'Massa e Cozzile 1'),
+        ('CU1', 'Chiesina Uzzanese 1'),
+        ('UZ 1', 'Uzzano 1'), 
+    )
+    now = datetime.datetime.now()
+    current_year = now.year
     first_choice = forms.ChoiceField(choices=MY_CHOICES)
     second_choice = forms.ChoiceField(choices=MY_CHOICES)
-    dob_child = forms.DateField(widget=extras.SelectDateWidget(years=range(current_year - 18, current_year - 5)))
+    dob_child = forms.DateField(widget=extras.SelectDateWidget(attrs = {
+                'display': 'inline-block',}, years=range(current_year - 18, current_year - 5)))
     class Meta:
         model = Inscription
         fields = ('fn_parent', 'sn_parent', 'fn_child', 'sn_child', 'dob_child', 'bio_child', 'first_choice', 'second_choice',)
+
+
+
+"""
+PLACES Form
+
+"""
+
+
+
+
 class PlaceForm(forms.ModelForm):
+    MY_CHOICES2 = (
+        ('CASA', 'CASA'),
+        ('TERRENO', 'TERRENO'),
+        ('CASA + TERRENO', 'CASA + TERRENO'),
+    )
+    MY_CHOICES3 = (
+        ('SI', 'SI'),
+        ('NO', 'NO '),
+    )
     typ = forms.ChoiceField(choices=MY_CHOICES2)
     heat = forms.ChoiceField(choices=MY_CHOICES3)
     class Meta:

@@ -1,16 +1,65 @@
 {% extends 'blog/base.html' %}
-
+{% load widget_tweaks %}
+{{ form.media }}
 {% block content %}
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Modifica la foto</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="image" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span class="glyphicon glyphicon-zoom-out"></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary js-crop-and-upload" data-dismiss="modal">Fatto</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <section class="about" id="about">
   <div class="container">
     <div class="features_list">
-    <h1>New post</h1>
-    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
+      <form method="POST" enctype="multipart/form-data" id="formUpload">
+        {% csrf_token %}
+        <div class="well">
+          <h4 style="margin-top: 0">Nuovo post</h4>
+          <div class="row">
+            <div class="form-group col-sm-5 col-md-4">
+                Titolo          
+                {% render_field form.title class="form-control" %}
+                Testo
+                {% render_field form.text class="form-control" %}
+            </div>
+            <div class="form-group col-sm-5 col-md-4">
+                Immagine
+                {% render_field form.img class="form-control" %}
+                {% render_field form.x %}
+                {% render_field form.y %}
+                {% render_field form.width %}
+                {% render_field form.height %}
+            </div>
+          </div>
         <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-    </div>
-  </div>
+        </div>
+      </form>
+    </div>  
+    <img src="" id="image" style="max-width: 100%;">
 </section>
+
 
 {% endblock %}

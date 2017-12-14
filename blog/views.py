@@ -26,9 +26,10 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
 @login_required(login_url='/login/')
 def post_new(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if (form.is_valid() and request.user.is_staff):
             post = form.save(commit=False)
@@ -36,33 +37,53 @@ def post_new(request):
             post.gruppo = request.user.profile.gruppo
             post.published_date = timezone.now()
             post.save()
+            if post.img:
+                form.save_img()
             return redirect('post_detail', pk=post.pk)
         elif form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.gruppo = request.user.profile.gruppo
             post.save()
+            if post.img:
+                form.save_img()
             target = User.objects.filter(profile__gruppo=post.gruppo, is_staff=True)
             if not target:
                 target = User.objects.filter(is_staff=True)
             for user in target:
                 current_site = get_current_site(request)
                 subject = 'Richiesta post'
-                message = render_to_string('blog/post_request_email.html', {
-                    'user': request.user,
-                    'domain': current_site.domain,
-                    'title': post.title,
-                    'text': post.text,
-                    'image': post.img.url,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'pid': urlsafe_base64_encode(force_bytes(post.pk)),
-                    'token': post_token.make_token(user),
-                    })
+                if post.img:
+                    message = render_to_string('blog/post_request_email.html', {
+                        'user': request.user,
+                        'domain': current_site.domain,
+                        'title': post.title,
+                        'text': post.text,
+                        'image': post.img.url,
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'pid': urlsafe_base64_encode(force_bytes(post.pk)),
+                        'token': post_token.make_token(user),
+                        })
+                else:
+                    message = render_to_string('blog/post_request_email.html', {
+                        'user': request.user,
+                        'domain': current_site.domain,
+                        'title': post.title,
+                        'text': post.text,
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'pid': urlsafe_base64_encode(force_bytes(post.pk)),
+                        'token': post_token.make_token(user),
+                        })
                 user.email_user(subject, message)
-            return redirect('post_detail', pk=post.pk)
+                return redirect('post_detail', pk=post.pk)
+        
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+
+
 def post_confirm(request, uidb64, pidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -150,7 +171,16 @@ def profile_detail(request):
     user = get_object_or_404(User, username=request.user)
     return render(request, 'blog/profile_detail.html', {'user': user})
 
-
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    if data['is_taken']:
+        data['error_message'] = 'Esiste già un utente con questo username.'
+    else:
+        data['error_message'] = 'Questo va bene.'
+    return JsonResponse(data)
 """
 INSCRIPTIONS ENVIRONMENT
 

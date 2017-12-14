@@ -2,14 +2,12 @@
 
 {% block content %}
 
-
-
-
     <section class="about" id="about">
         <div class="container">
             <div class="features_list">
                 <h2>Sign up</h2>
-				<form method="post">
+				<form method="post" data-validate-username-url="{% url 'validate_username' %}">
+            <p id="valid_username"></p>
     				{% csrf_token %}
     				{{ form.as_p }}
     				<button type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button>
@@ -18,7 +16,28 @@
         </div>
     </section>
 
+{% endblock %}
 
 
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      var form = $(this).closest("form");
+      $.ajax({
+        url: form.attr("data-validate-username-url"),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            document.getElementById("valid_username").innerHTML = (data.error_message);
+          }
+          else {
+            document.getElementById("valid_username").innerHTML = "Questo va bene";
+          }
 
+        }
+      });
+
+    });
+  </script>
 {% endblock %}

@@ -8,8 +8,12 @@ Titolo:
 Contenuto:
 {{ text }}
 
+{% if image %}
 Immagine allegata:
-http://{{ domain }}{{ image }}
+<img src = "http://{{ domain }}{{ image }}">
+{% else %}
+Nessuna immagine allegata.
+{% endif %}
 
 Se vuoi consentire la pubblucazione di questo post apri il seguente link entro 7 giorni:
 
