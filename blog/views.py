@@ -100,18 +100,19 @@ def post_confirm(request, uidb64, pidb64, token):
         return redirect('/')
     else:
         return render(request, 'blog/account_activation_invalid.html')
+
 @login_required(login_url='/login/')
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if (request.method == "POST" and post.gruppo == request.user.profile.gruppo and request.user.is_staff or request.user.is_superuser and request.method == "POST"):
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
             if post.img:
-                form.save_img()
+                form.save_img()            
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)

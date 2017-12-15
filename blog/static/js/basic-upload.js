@@ -32,6 +32,10 @@ $(function () {
     var $ig = $('#id_img');
    $ig.wrap('<form>').closest('form').get(0).reset();
    $ig.unwrap();
+   $("#id_x").val();
+   $("#id_y").val();
+   $("#id_height").val();
+   $("#id_width").val();
    $(".preview").hide();
   });
 
