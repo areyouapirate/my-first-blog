@@ -29,6 +29,7 @@ def post_detail(request, pk):
 
 @login_required(login_url='/login/')
 def post_new(request):
+    post = None
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if (form.is_valid() and request.user.is_staff):
@@ -80,7 +81,7 @@ def post_new(request):
         
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'post': post})
 
 
 
@@ -112,15 +113,32 @@ def post_edit(request, pk):
             a_post.author = request.user
             a_post.published_date = timezone.now()
             a_post.save()
-            if a_post.img:
+            try:
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
+            except (TypeError, ValueError, OverflowError):
+                x = None
+            if x is not None:
                 form.save_img()  
                 old_img.delete(False)          
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'post': post})
 
+@login_required(login_url='/login/')
 
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if (post.gruppo == request.user.profile.gruppo and request.user.is_staff or request.user.is_superuser):
+        post.img.delete(False) 
+        post.delete(False)          
+        return redirect('/')
+    else:
+        form = PostForm(instance=post)
+        return render(request, 'blog/account_activation_invalid.html')
 
 
 

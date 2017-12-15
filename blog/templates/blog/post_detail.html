@@ -51,10 +51,12 @@
                 {% if post.author == request.user and request.user.is_staff %}
                     <a  href="{% url 'post_edit' pk=post.pk %}"><span class="right_icon">Modifica</span></a>
                 {% elif request.user.is_superuser %}
-                    <a  href="{% url 'post_edit' pk=post.pk %}"><span class="right_icon">modifica</span></a>
+                    <a  href="{% url 'post_edit' pk=post.pk %}"><span class="right_icon">Modifica</span></a>
                 {% endif %}
                 <a  href=""><span class="right_icon">{{ post.author }}</span></a>
+                {% if request.user.profile.group %}
                 <a  href=""><span class="right_icon">{{ post.gruppo }}</span></a>
+                {% endif %}
             </div>
         </div>
     </footer>

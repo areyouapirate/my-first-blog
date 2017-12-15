@@ -30,6 +30,29 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalDel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Elimina definitivamente il post</h4>
+      </div>
+      <div class="modal-body">
+        <p> Premendo ELIMINA cancellerai definivamente il post senza possibilità di recuperarlo, sei sicuro di voler continuare?</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" data-dismiss="modal" class="btn btn-default ">No</button>
+        </div>
+        {% if post %}
+        <a id href="{% url 'post_remove' pk=post.pk %}"><button type="button" class="btn btn-primary">Si</button></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="about" id="about">
   <div class="container">
@@ -60,6 +83,9 @@
               <div class="preview" style="display: none; margin: 0 auto; overflow: hidden; width: 300px; height: 400px;"></div>
             </div>
           </div>
+          {% if post %}
+          <button type="button" class="btn btn-default catastrofe" style="float: right;">Elimina Post</button>
+          {% endif %}
         <button type="save" class="save btn btn-primary ">Save</button>
         </div>
       </form>
@@ -68,5 +94,15 @@
     
 </section>
 
+{% endblock %}
 
+{% block jscript %}
+<script >
+
+    /* SCRIPT PER ELIMINARE IL POST CON POPUP*/
+  $(".catastrofe").click(function () {
+    $("#modalDel").modal("show");
+  });
+
+</script>
 {% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
 	url(r'^inscr/new/$', views.inscr_new, name='inscr_new'),
 	url(r'^inscr/(?P<pk>[0-9]+)/$', views.inscr_detail, name='inscr_detail'),
 	url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
+	url(r'^post/(?P<pk>[0-9]+)/remove/$', views.post_remove, name='post_remove'),
 	url(r'^login/$', auth_views.login, {'template_name': 'blog/login.html'}, name='login'),
 	url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 	url(r'^admin/', admin.site.urls),

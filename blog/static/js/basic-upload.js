@@ -1,5 +1,4 @@
 $(function () {
-
   /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
   $("#id_img").change(function () {
     if (this.files && this.files[0]) {
@@ -81,6 +80,7 @@ $(function () {
     $("#id_height").val(cropData["height"]);
     $("#id_width").val(cropData["width"]);
   });
+
 
 });
 
