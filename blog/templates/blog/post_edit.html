@@ -68,9 +68,11 @@
                 Testo
                 {% render_field form.text class="form-control" %}
             </div>
+            
             <div class="form-group col-sm-5 col-md-4">
                 Immagine
                 {% render_field form.img class="form-control" %}
+                {% render_field form.remove_photo %}
                 {% render_field form.x %}
                 {% render_field form.y %}
                 {% render_field form.width %}
@@ -79,9 +81,16 @@
                 <button type="button" class="btn btn-default js-img-modify" id="mod_butt" style="margin-top: 10px; display: none;">Modifica</button>
                 <button type="button" class="btn btn-default js-img-remove" id="rm_butt" style="margin-top: 10px; display: none;">Rimuovi</button>
             </div>
+            
             <div class="form-group col-sm-5 col-md-4">
               <div class="preview" style="display: none; margin: 0 auto; overflow: hidden; width: 300px; height: 400px;"></div>
             </div>
+            {% if post.img %}
+            <div class="form-group col-sm-5 col-md-4 old_preview">
+              <button type="button" class="btn btn-default js-img-remove-old" style="margin-top: 10px;">Rimuovi immagine</button>  
+              <img id="old_preview" src="{{ post.img.url }}" style="max-width: 100%;">
+            </div>
+            {% endif %}
           </div>
           {% if post %}
           <button type="button" class="btn btn-default catastrofe" style="float: right;">Elimina Post</button>
@@ -96,12 +105,17 @@
 
 {% endblock %}
 
-{% block jscript %}
+{% block javascript %}
 <script >
 
     /* SCRIPT PER ELIMINARE IL POST CON POPUP*/
   $(".catastrofe").click(function () {
     $("#modalDel").modal("show");
+  });
+  $(".js-img-remove-old").click(function () {
+    $("#id_remove_photo").val("True");
+    $(".old_preview").hide();
+
   });
 
 </script>

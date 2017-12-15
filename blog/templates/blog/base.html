@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	{{ form.media }}
 </head>
 <body>
@@ -53,7 +54,7 @@
 	<!--  End Header Section  -->
 	{% block content %}
 	{% endblock %}
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/cropper.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/wow.js' %}"></script>
@@ -69,7 +70,7 @@
 
   	{# PHOTOS PAGE SCRIPTS #}  	
   	<script src="{% static 'js/basic-upload.js' %}"></script>
-  	{% block jscript %}
+  	{% block javascript %}
 	{% endblock %}
 </body>
 </html>

@@ -10,6 +10,8 @@ $(function () {
         $("#mod_butt").show();
         $("#rm_butt").show();
         $(".preview").show();
+        $(".old_preview").hide();
+        $("#id_remove_photo").val("False");
       }
       reader.readAsDataURL(this.files[0]);
     }
@@ -36,6 +38,8 @@ $(function () {
    $("#id_height").val();
    $("#id_width").val();
    $(".preview").hide();
+   $(".js-img-remove").hide();
+   $(".js-img-modify").hide();
   });
 
   /* SCRIPTS TO HANDLE THE CROPPER BOX */

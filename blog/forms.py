@@ -25,11 +25,21 @@ class PostForm(forms.ModelForm):
     y = forms.FloatField(required=False, widget=forms.HiddenInput())
     width = forms.FloatField(required=False, widget=forms.HiddenInput())
     height = forms.FloatField(required=False, widget=forms.HiddenInput())
+    remove_photo = forms.BooleanField(required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = Post
-        fields = ('title', 'text', 'img', 'x', 'y', 'width', 'height', )
-
+        fields = ('title', 'text', 'img', 'remove_photo', 'x', 'y', 'width', 'height', )
+        widgets = {
+            'img': forms.FileInput,
+        }
+    def save(self, commit=True):
+        instance = super(PostForm, self).save(commit=False)
+        if self.cleaned_data.get('remove_photo'):
+            instance.img.delete(False) 
+        if commit:
+            instance.save()
+        return instance
     def save_img(self):
         ist = super(PostForm, self).save()
 
