@@ -104,15 +104,17 @@ def post_confirm(request, uidb64, pidb64, token):
 @login_required(login_url='/login/')
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    old_img = post.img
     if (request.method == "POST" and post.gruppo == request.user.profile.gruppo and request.user.is_staff or request.user.is_superuser and request.method == "POST"):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            if post.img:
-                form.save_img()            
+            a_post = form.save(commit=False)
+            a_post.author = request.user
+            a_post.published_date = timezone.now()
+            a_post.save()
+            if a_post.img:
+                form.save_img()  
+                old_img.delete(False)          
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
