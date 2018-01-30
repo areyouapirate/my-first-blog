@@ -13,8 +13,9 @@ from .tokens import account_activation_token, post_token
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .filters import InscriptionFilter, PlaceFilter
-import datetime, pdfkit
+import datetime
 from django.template import Context
+from weasyprint import HTML, CSS
 """
 POST ENVIRONMENT
 
@@ -256,7 +257,7 @@ def inscr_list(request):
             context = Context({'filter3': inscr_filter3, 'time': print_time, 'user': user_request})
             template = get_template('blog/inscr_pdf.html')
             html = template.render(context)
-            pdf = pdfkit.from_string(html, False)
+            pdf = HTML(string=html).write_pdf()
             filename = "sample_pdf.pdf"
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -265,7 +266,7 @@ def inscr_list(request):
             context = Context({'filter1': inscr_filter1, 'time': print_time, 'user': user_request})
             template = get_template('blog/inscr_pdf.html')
             html = template.render(context)
-            pdf = pdfkit.from_string(html, False)
+            pdf = HTML(string=html).write_pdf()
             filename = "sample_pdf.pdf"
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -274,7 +275,7 @@ def inscr_list(request):
             context = Context({'filter2': inscr_filter2, 'time': print_time, 'user': user_request})
             template = get_template('blog/inscr_pdf.html')
             html = template.render(context)
-            pdf = pdfkit.from_string(html, False)
+            pdf = HTML(string=html).write_pdf()
             filename = "sample_pdf.pdf"
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -283,7 +284,7 @@ def inscr_list(request):
             context = Context({'filter0': inscr_filter0, 'time': print_time, 'user': user_request})
             template = get_template('blog/inscr_pdf.html')
             html = template.render(context)
-            pdf = pdfkit.from_string(html, False)
+            pdf = HTML(string=html).write_pdf()
             filename = "sample_pdf.pdf"
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
@@ -292,7 +293,7 @@ def inscr_list(request):
             context = Context({'filter0': inscr_filter0, 'filter1': inscr_filter1, 'filter2': inscr_filter2, 'time': print_time, 'user': user_request })
             template = get_template('blog/inscr_pdf.html')
             html = template.render(context)
-            pdf = pdfkit.from_string(html, False)
+            pdf = HTML(string=html).write_pdf()
             filename = "sample_pdf.pdf"
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="' + filename + '"'

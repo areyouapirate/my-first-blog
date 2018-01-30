@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 #
 import os
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = bool( os.environ.get('DEBUG', True) )
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS')
+
 
 
 # Application definition
@@ -59,7 +61,7 @@ MAP_WIDGETS = {
         ("language", "IT"),
     ),
     "LANGUAGE": "IT",
-    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_MAP_API_KEY', '')
+    "GOOGLE_MAP_API_KEY": config('GOOGLE_MAP_API_KEY')
 }
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -102,8 +104,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-SPATIALITE_LIBRARY_PATH = '/usr/local/lib/mod_spatialite.so'
+if DEBUG == True :
+    SPATIALITE_LIBRARY_PATH = '/usr/local/lib/mod_spatialite.so'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -130,13 +132,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 
 
+if DEBUG == True :
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_PORT = config('EMAIL_PORT')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_BACKEND = config('EMAIL_BACKEND')
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
-EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
-EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', '')
-EMAIL_USE_TLS = bool( os.environ.get('EMAIL_USE_TLS', True) )
-"""
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-"""
+
