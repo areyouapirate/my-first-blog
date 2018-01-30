@@ -6,8 +6,8 @@
 <section class="about" id="about">
   <div class="container">
     <div class="features_list">
-
 {% if filter1.qs %}
+<form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
   <form method="get">
     <div class="well">
       <h2 style="margin-top: 0">Filtro</h2>
@@ -31,6 +31,7 @@
     </div>
   </form>
 {% elif filter0.qs %}
+<form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
    <form method="get">
     <div class="well">
       <h2 style="margin-top: 0">Filtro</h2>
@@ -54,6 +55,7 @@
     </div>
   </form>
 {% elif filter2.qs %}
+<form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
       <form method="get">
     <div class="well">
       <h2 style="margin-top: 0">Filtro</h2>
@@ -77,6 +79,7 @@
     </div>
   </form>
 {% elif filter3.qs %}
+<form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
   <form method="get">
     <div class="well">
       <h2 style="margin-top: 0">Filter</h2>
@@ -103,7 +106,7 @@
   <div> Nessun risultato trovato</div>
 {% endif %}
 {% if filter1.qs %}
-    <h1>Prime scelte</h1>
+    <h1>Prime scelte</h1><form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf1" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa</button></form>
     <table class="table table-bordered">
     <thead>
       <tr>
@@ -134,7 +137,7 @@
     </table>
 {% endif %}
 {% if filter2.qs %}
-    <h1>Seconde scelte</h1>
+    <h1>Seconde scelte</h1><form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf2" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa</button></form>
     <table class="table table-bordered">
     <thead>
       <tr>
@@ -165,7 +168,7 @@
     </table>
 {% endif %}
 {% if filter0.qs %}
-	<h1>Iscrizioni personali</h1>
+	<h1>Iscrizioni personali</h1><form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf3" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa</button></form>
     <table class="table table-bordered">
     <thead>
       <tr>
@@ -196,7 +199,7 @@
     </table>
 {% endif %}
 {% if filter3.qs %}
-    <h1>Tutte le iscrizioni</h1>
+    <h1>Tutte le iscrizioni</h1><form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf0" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa</button></form>
     <table class="table table-bordered">
     <thead>
       <tr>
@@ -226,7 +229,7 @@
     </tbody>
     </table>
 {% endif %}
-
+    
     </div>
   </div>
 </section>

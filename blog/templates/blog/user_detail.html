@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <section class="about" id="about">
+        <div class="container">
+            <div class="features_list">
+                {% if context.user.registration_date %}
+                <div class="date">
+                    {{ context.user.registration_date }} 
+                </div>
+                {% endif %}
+                <h1>{{ context.user.username }}</h1>
+                <p>Gruppo di appartenenza: {{ context.user.profile.gruppo }}</p>
+                <p>Nome: {{ context.user.first_name }}</p>
+                <p>Cognome: {{ context.user.last_name }}</p>
+                <p>Data di nascita: {{ context.user.profile.birth_date }}</p>
+                <p>Email: {{ context.user.email }}</p>
+            </div>
+            <div class="features_list">
+                <h2>Post pubblicati:</h2>
+            {% for post in context.posts %}
+                <div class="col-sm-4 col-md-4 details animated wow fadeInRight" data-wow-delay="0s">
+                    {% if post.img %}
+                    <div class="container"><a class="c1" href="{% url 'post_detail' pk=post.pk %}">
+                    <img class="pre" src="{{ post.img.url }}" alt="" title="">
+                    <h1 class="text-uppercase"><a class="c1" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    </div>
+                    {% endif %}
+                    {% if not post.img %}
+                    <h1 class="text-uppercase"><a class="c2" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    {% endif %}
+                    <p> {{ post.text }} </p>
+                </div>
+            {% endfor %}    
+            </div>
+        </div>
+    </section>
+{% endblock %}

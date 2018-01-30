@@ -8,8 +8,8 @@ import datetime
 from mapwidgets.widgets import GooglePointFieldWidget
 from PIL import Image
 from django.core.files import File
-
-
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -115,7 +115,7 @@ class InscrForm(forms.ModelForm):
                 'display': 'inline-block',}, years=range(current_year - 18, current_year - 5)))
     class Meta:
         model = Inscription
-        fields = ('fn_parent', 'sn_parent', 'fn_child', 'sn_child', 'dob_child', 'bio_child', 'first_choice', 'second_choice',)
+        fields = ('fn_parent', 'sn_parent', 'fn_child', 'sn_child', 'dob_child', 'phone_parent', 'bio_child', 'first_choice', 'second_choice',)
 
 
 

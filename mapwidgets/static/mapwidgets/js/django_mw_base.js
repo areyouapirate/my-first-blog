@@ -162,7 +162,8 @@
 			if(navigator.geolocation){
 				navigator.geolocation.getCurrentPosition(
 					this.handleCurrentPosition.bind(this),
-					this.handlecurrentPositionError.bind(this)
+					this.handlecurrentPositionError.bind(this),
+					{maximumAge:60000, timeout:5000, enableHighAccuracy:true}
 				);
 			}else{
 				this.handlecurrentPositionError();
@@ -178,7 +179,7 @@
 		
 		handlecurrentPositionError: function(){
 			this.hideOverlay();
-			alert("Your location could not be found.");
+			alert("Non possiamo determinare la tua posizione.");
 		},
 		
 		handleAutoCompleteInputKeyDown: function (e) {

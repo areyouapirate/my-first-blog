@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^$', views.post_list, name='post_list'),
 	url(r'^inscriptions/$', views.inscr_list, name='inscr_list'),
 	url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
+	url(r'^user/(?P<pk>[0-9]+)/$', views.user_detail, name='user_detail'),
 	url(r'^your_profile/$', views.profile_detail, name='profile_detail'),
 	url(r'^post/new/$', views.post_new, name='post_new'),
 	url(r'^inscr/new/$', views.inscr_new, name='inscr_new'),

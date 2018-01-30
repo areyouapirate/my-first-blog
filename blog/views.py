@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
 from .models import Post, Inscription, Place
@@ -8,13 +8,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template 
 from .tokens import account_activation_token, post_token
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .filters import InscriptionFilter, PlaceFilter
-import datetime
-
+import datetime, pdfkit
+from django.template import Context
 """
 POST ENVIRONMENT
 
@@ -26,6 +26,7 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
 
 @login_required(login_url='/login/')
 def post_new(request):
@@ -205,6 +206,13 @@ def validate_username(request):
     else:
         data['error_message'] = 'Questo va bene.'
     return JsonResponse(data)
+
+def user_detail(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    posts = Post.objects.filter(author=user).order_by('-published_date')
+    context = {'posts': posts, 'user': user}
+    return render(request, 'blog/user_detail.html', {'context': context})
+
 """
 INSCRIPTIONS ENVIRONMENT
 
@@ -231,23 +239,70 @@ def inscr_detail(request, pk):
     else:
         return redirect('/')
 def inscr_list(request):
-    if request.user.is_superuser:
-        inscr_origin3 = Inscription.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-        inscr_filter3 = InscriptionFilter(request.GET, queryset=inscr_origin3)
+    inscr_origin3 = Inscription.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    inscr_filter3 = InscriptionFilter(request.GET, queryset=inscr_origin3)
+    inscr_origin1 = Inscription.objects.filter(published_date__lte=timezone.now(), first_choice=request.user.profile.gruppo).order_by('published_date')
+    inscr_filter1 = InscriptionFilter(request.GET, queryset=inscr_origin1)
+    inscr_origin2 = Inscription.objects.filter(published_date__lte=timezone.now(), second_choice=request.user.profile.gruppo).order_by('published_date')
+    inscr_filter2 = InscriptionFilter(request.GET, queryset=inscr_origin2)
+    inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
+    inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
+    inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
+    inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
+    if request.method == "POST":
+        print_time = timezone.now()
+        user_request = request.user
+        if 'pdf0' in request.POST:
+            context = Context({'filter3': inscr_filter3, 'time': print_time, 'user': user_request})
+            template = get_template('blog/inscr_pdf.html')
+            html = template.render(context)
+            pdf = pdfkit.from_string(html, False)
+            filename = "sample_pdf.pdf"
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+            return response
+        if 'pdf1' in request.POST:
+            context = Context({'filter1': inscr_filter1, 'time': print_time, 'user': user_request})
+            template = get_template('blog/inscr_pdf.html')
+            html = template.render(context)
+            pdf = pdfkit.from_string(html, False)
+            filename = "sample_pdf.pdf"
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+            return response
+        if 'pdf2' in request.POST:
+            context = Context({'filter2': inscr_filter2, 'time': print_time, 'user': user_request})
+            template = get_template('blog/inscr_pdf.html')
+            html = template.render(context)
+            pdf = pdfkit.from_string(html, False)
+            filename = "sample_pdf.pdf"
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+            return response
+        if 'pdf3' in request.POST:
+            context = Context({'filter0': inscr_filter0, 'time': print_time, 'user': user_request})
+            template = get_template('blog/inscr_pdf.html')
+            html = template.render(context)
+            pdf = pdfkit.from_string(html, False)
+            filename = "sample_pdf.pdf"
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+            return response
+        if 'pdf4' in request.POST:
+            context = Context({'filter0': inscr_filter0, 'filter1': inscr_filter1, 'filter2': inscr_filter2, 'time': print_time, 'user': user_request })
+            template = get_template('blog/inscr_pdf.html')
+            html = template.render(context)
+            pdf = pdfkit.from_string(html, False)
+            filename = "sample_pdf.pdf"
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+            return response
+    elif request.user.is_superuser:
         return render(request, 'blog/inscr_list.html', {'filter3': inscr_filter3})
     elif request.user.is_staff:
-        inscr_origin1 = Inscription.objects.filter(published_date__lte=timezone.now(), first_choice=request.user.profile.gruppo).order_by('published_date')
-        inscr_filter1 = InscriptionFilter(request.GET, queryset=inscr_origin1)
-        inscr_origin2 = Inscription.objects.filter(published_date__lte=timezone.now(), second_choice=request.user.profile.gruppo).order_by('published_date')
-        inscr_filter2 = InscriptionFilter(request.GET, queryset=inscr_origin2)
-        inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
-        inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
         return render(request, 'blog/inscr_list.html', {'filter0': inscr_filter0, 'filter1': inscr_filter1, 'filter2': inscr_filter2})
     else:
-        inscr_origin0 = Inscription.objects.filter(published_date__lte=timezone.now(), author=request.user).order_by('published_date')
-        inscr_filter0 = InscriptionFilter(request.GET, queryset=inscr_origin0)
         return render(request, 'blog/inscr_list.html', {'filter0': inscr_filter0})
-
 
 """
 PLACES ENVIRONMENT

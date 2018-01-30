@@ -28,37 +28,41 @@
 <!--  App Features Section  -->
     <section class="about" id="about">
         <div class="container">
-            <div class="features_list">
+            <div class="features_list" style="min-height: calc(100vh - 860px);">
                 {% if not post.img %}
                     <h1 class="text-uppercase  animated wow fadeInLeft">{{ post.title }}</h1>
                 {% endif %}
-
-
-        <p id="full">{{ post.text|linebreaksbr }}</p>   
-        <p id="full">{{ post.approval }}</p>
+                <p id="full">{{ post.text|linebreaksbr }}</p>   
+                <div id="approval">Post approvato da: {{ post.approval }}</div>
+                {% if post.published_date %}
+                    <div class="date">
+                        {{ post.published_date }} 
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>
     <!--  Footer Section  -->
     <footer>
         <div class="container">
-            <div class="pull-right">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }} 
             </div>
         {% endif %}
+            <div class="pull-right">
                 {% if post.author == request.user and request.user.is_staff %}
                     <a  href="{% url 'post_edit' pk=post.pk %}"><span class="right_icon">Modifica</span></a>
                 {% elif request.user.is_superuser %}
                     <a  href="{% url 'post_edit' pk=post.pk %}"><span class="right_icon">Modifica</span></a>
                 {% endif %}
-                <a  href=""><span class="right_icon">{{ post.author }}</span></a>
+                <a  href="{% url 'user_detail' pk=post.author.pk %}"><span class="right_icon">{{ post.author }}</span></a>
                 {% if request.user.profile.group %}
                 <a  href=""><span class="right_icon">{{ post.gruppo }}</span></a>
                 {% endif %}
             </div>
         </div>
     </footer>
+
     <!--  End Footer Section  -->
 {% endblock %}

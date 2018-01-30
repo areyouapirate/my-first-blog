@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l4a#3n!-$(i2(%x#5^&h9*p&glw*!6+ykcxg&uud*56zbg9!_f'
-
+#
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool( os.environ.get('DEBUG', True) )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '')
 
 
 # Application definition
@@ -42,6 +44,10 @@ INSTALLED_APPS = (
     'django_filters',
     'django.contrib.gis',
     'mapwidgets',
+    'django_tables2',
+    'pdfkit',
+    'phonenumber_field',
+
 )
 
 MAP_WIDGETS = {
@@ -53,7 +59,7 @@ MAP_WIDGETS = {
         ("language", "IT"),
     ),
     "LANGUAGE": "IT",
-    "GOOGLE_MAP_API_KEY": "AIzaSyCRU4ZZiIBGj2wkuA-tl6jEl4_i-ndD7DI"
+    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_MAP_API_KEY', '')
 }
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -97,7 +103,7 @@ DATABASES = {
     }
 }
 
-SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
+SPATIALITE_LIBRARY_PATH = '/usr/local/lib/mod_spatialite.so'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -124,11 +130,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', '')
+EMAIL_USE_TLS = bool( os.environ.get('EMAIL_USE_TLS', True) )
 """
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 """

@@ -428,6 +428,13 @@ a.app_link{
 
 /*		About section 		*/
 
+#approval{
+	position: absolute;
+	margin-top: 50px;
+	font-family: "open_regular", Helvetica, Arial, sans-serif;
+	color: #7a7a7a;
+}
+
 .about{
 	padding: 100px 0;
 }
@@ -445,8 +452,15 @@ a.app_link{
 	height: auto;
 	min-height: 100%;
 
+} 
+.about .date{
+	display: none;
+	position: relative;
+	color: #7a7a7a;
+	font-family: "open_regular", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	padding: 10px 0px;
 }
-
 
 
 .about .features_list{
@@ -878,16 +892,10 @@ a.app_link{
 
 
 footer{
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 130px;
-	z-index: 99;
+    height:55px;
+    width:100%;
+    max-width: 1200px;
 	background-color: #41c17d;
-	background-image: -moz-linear-gradient(bottom, #47ad76 0%, #47ad76 0.27%, #40c27d 99.46%, #40c27d 100%);
-	background-image: -o-linear-gradient(bottom, #47ad76 0%, #47ad76 0.27%, #40c27d 99.46%, #40c27d 100%);
-	background-image: -webkit-linear-gradient(bottom, #47ad76 0%, #47ad76 0.27%, #40c27d 99.46%, #40c27d 100%);
-	background-image: linear-gradient(bottom, #47ad76 0%, #47ad76 0.27%, #40c27d 99.46%, #40c27d 100%);
 }
 
 footer .logo{
@@ -896,7 +904,6 @@ footer .logo{
 }
 
 footer .right_icon{
-	display: none;
 	float: right;
 	background: #ffffff;
 	padding: 5px 10px;
@@ -910,7 +917,7 @@ footer .right_icon{
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 
-	margin: 0px 0px 0 20px;
+	margin: 15px 0px 20px 20px;
 }
 
 footer .right_icon:hover{
@@ -948,43 +955,15 @@ footer .left_icon.active{
 	color: #ffffff;
 }
 footer .date{
-	display: table-cell;
+	position: absolute;
+	margin-left: 80px;
 	color: #fff;
 	font-family: "open_regular", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	padding: 10px 0px;
 }
-footer div{
-	margin-top: 50px;
-	display: table-cell;
-}
 
-footer div li{
-	float: left;
-	margin-left: 40px;
-	list-style:none;
-}
 
-footer div li:first-child{
-	margin: 0;
-}
-
-footer div li a{
-	color: #fff;
-	font-family: "open_regular", Helvetica, Arial, sans-serif;
-	font-size: 16px;
-
-	transition: all .2s linear;
-	-o-transition: all .2s linear;
-	-moz-transition: all .2s linear;
-	-webkit-transition: all .2s linear;
-}
-
-footer div li a:hover,
-footer div li a:focus{
-	text-decoration: none;
-	color: #B7EFD1!important;
-}
 
 footer .social{
 	display: table-cell;
@@ -1017,6 +996,12 @@ footer .social li:first-child{
 
 @media (max-width: 767px) {
 
+	.about .date{
+		display: block;
+	}
+	footer .date{
+		display: none;
+	}
 
 	/*		Header 		*/
 	header .logo{

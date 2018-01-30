@@ -9,7 +9,8 @@
                     {{ request.user.registration_date }} 
                 </div>
                 {% endif %}
-                <h1>{{ request.user.username }}</h1>
+                <h1>Il tuo profilo</h1>
+                <p>Username: {{ request.user.username }}</p>
                 <p>Gruppo di appartenenza: {{ request.user.profile.gruppo }}</p>
                 <p>Nome: {{ request.user.first_name }}</p>
                 <p>Cognome: {{ request.user.last_name }}</p>

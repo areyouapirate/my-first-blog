@@ -22,7 +22,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	{{ form.media }}
 </head>
-<body>
+<body style="background: linear-gradient(to right, gray, black, black, gray)">
+	<div style="max-width: 1200px; margin-left:auto; margin-right:auto; background-color: white;">
 	<!--  Header Section  -->
 	<header>
 		<div class="container">
@@ -36,7 +37,7 @@
 			</nav>
 			{% if user.is_authenticated %}
 			<nav class="pull-right">
-					<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="/your_profile"> {{ user.username }} <img src="{% static 'img/user1.png' %}" alt="" title=""></a></li>
+					<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="/your_profile"> {{ request.user.username }} <img src="{% static 'img/user1.png' %}" alt="" title=""></a></li>
 			</nav>
 			{% else %}
 			<nav class="pull-right">
@@ -52,8 +53,12 @@
 		</div>
 	</header>
 	<!--  End Header Section  -->
+	<div style="min-height: calc(100vh - 130px);">
 	{% block content %}
-	{% endblock %}
+	{% endblock %}		
+	</div>
+
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/cropper.min.js' %}"></script>

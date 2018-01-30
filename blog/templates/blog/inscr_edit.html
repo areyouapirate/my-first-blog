@@ -8,37 +8,43 @@
     <div class="well">
       <h4 style="margin-top: 0">Nuova iscrizione</h4>
       <div class="row">
-        <div class="form-group col-sm-6 col-md-5">
+        <div class="form-group col-sm-7 col-md-6">
         	Nome Genitore
           {% render_field form.fn_parent class="form-control" %}
         </div>
-        <div class="form-group col-sm-6 col-md-5">
+        <div class="form-group col-sm-7 col-md-6">
         	Cognome Genitore
           {% render_field form.sn_parent class="form-control" %}
         </div>
-        <div class="form-group col-sm-6 col-md-5">
+        <div class="form-group col-sm-7 col-md-6">
         	Nome Figlio
           {% render_field form.fn_child class="form-control" %}
         </div>
-        <div class="form-group col-sm-6 col-md-5">
+        <div class="form-group col-sm-7 col-md-6">
         	Cognome Figlio
           {% render_field form.sn_child class="form-control" %}
         </div>
-        <div class="form-group col-sm-2 col-md-2">
-        	Data di nascita
+      
+        <div class="form-group col-sm-7 col-md-6">
+          Data di nascita
           {% render_field form.dob_child class="form-control" %}
         </div>
-      </div>
+        <div class="form-group col-sm-7 col-md-6">
+          Recapito telefonico
+          {% render_field form.phone_parent class="form-control" %}
+          <p style="font-size: 12px;">Inserisci il prefisso nazionale prima del numero, per l'italia +39</p>
+        </div>
+        </div>
       <div class="row">
-        <div class="form-group col-sm-15 col-md-14">
+        <div class="form-group col-sm-13 col-md-12">
         	Motivazioni
           {% render_field form.bio_child class="form-control" %}
         </div>
-        <div class="form-group col-sm-5 col-md-4">
+        <div class="form-group col-sm-7 col-md-6">
         	Prima scelta
           {% render_field form.first_choice class="form-control" %}
         </div>
-        <div class="form-group col-sm-5 col-md-4">
+        <div class="form-group col-sm-7 col-md-6">
         	Seconda scelta
           {% render_field form.second_choice class="form-control" %}
         </div>

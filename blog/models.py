@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.gis.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Inscription(models.Model):
     fn_parent = models.CharField(max_length=200)
@@ -11,11 +12,12 @@ class Inscription(models.Model):
     fn_child = models.CharField(max_length=200)
     sn_child = models.CharField(max_length=200)
     dob_child = models.DateField(null=True, blank=True)
-    bio_child = models.TextField()
+    phone_parent = PhoneNumberField(default='')
+    bio_child = models.TextField(blank=True)
     first_choice = models.CharField(max_length=200)
     second_choice = models.CharField(max_length=200)
     published_date = models.DateTimeField(blank=True, null=True)
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     def __str__(self):
         return '%s %s %s %s' % (self.published_date, self.fn_child, self.sn_child, self.dob_child)
 class Profile(models.Model):
@@ -36,7 +38,7 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     gruppo = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -64,7 +66,7 @@ class Place(models.Model):
     contacts = models.CharField(max_length=200)
     description = models.TextField()
     published_date = models.DateTimeField(blank=True, null=True)
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     def publish(self):
         self.published_date = timezone.now()
         self.save()
