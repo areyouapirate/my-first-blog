@@ -29,7 +29,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'text', 'img', 'remove_photo', 'x', 'y', 'width', 'height', )
+        fields = ('title', 'subtitle', 'text', 'img', 'remove_photo', 'x', 'y', 'width', 'height', )
         widgets = {
             'img': forms.FileInput,
         }

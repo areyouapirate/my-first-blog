@@ -107,7 +107,7 @@
 {% endif %}
 {% if filter1.qs %}
     <h1>Prime scelte</h1><form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf1" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa</button></form>
-    <table class="table table-bordered">
+    <table id="mytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
       <tr>
         <th>Anno</th>
@@ -233,4 +233,9 @@
     </div>
   </div>
 </section>
+<script >
+  $(document).ready(function() {
+    $('#mytable').DataTable();
+  } );
+</script>
 {% endblock %}

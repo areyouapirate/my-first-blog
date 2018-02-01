@@ -37,6 +37,7 @@ def post_new(request):
         if (form.is_valid() and request.user.is_staff):
             post = form.save(commit=False)
             post.author = request.user
+            post.nomeautore = request.user.first_name + ' ' + request.user.last_name
             post.gruppo = request.user.profile.gruppo
             post.published_date = timezone.now()
             post_x = form.cleaned_data.get('x')
@@ -47,6 +48,7 @@ def post_new(request):
         elif form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.nomeautore = request.user.first_name + ' ' + request.user.last_name
             post.gruppo = request.user.profile.gruppo
             post.save()
             if post.img:
@@ -62,6 +64,7 @@ def post_new(request):
                         'user': request.user,
                         'domain': current_site.domain,
                         'title': post.title,
+                        'subtitle': post.subtitle,
                         'text': post.text,
                         'image': post.img.url,
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -73,6 +76,7 @@ def post_new(request):
                         'user': request.user,
                         'domain': current_site.domain,
                         'title': post.title,
+                        'subtitle': post.subtitle,
                         'text': post.text,
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                         'pid': urlsafe_base64_encode(force_bytes(post.pk)),
@@ -113,6 +117,7 @@ def post_edit(request, pk):
         if form.is_valid():
             a_post = form.save(commit=False)
             a_post.author = request.user
+            a_post.nomeautore = request.user.first_name + ' ' + request.user.last_name
             a_post.published_date = timezone.now()
             a_post.save()
             try:
@@ -239,6 +244,8 @@ def inscr_detail(request, pk):
         return render(request, 'blog/inscr_detail.html', {'inscr': inscr})
     else:
         return redirect('/')
+
+@login_required(login_url='/login/')
 def inscr_list(request):
     inscr_origin3 = Inscription.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     inscr_filter3 = InscriptionFilter(request.GET, queryset=inscr_origin3)

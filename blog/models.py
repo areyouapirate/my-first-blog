@@ -39,8 +39,10 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    nomeautore = models.CharField(max_length=500)
     gruppo = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=500)
     text = models.TextField()
     approval = models.TextField()
     img = models.ImageField(upload_to='post_img/', blank=True, null=True)
