@@ -285,7 +285,7 @@ h3{
   z-index: 50px;
 }
 
-#container-floating:hover{
+#container-floating:hover, #container-floating.hover{
   height: 90px;
   width: 400px;
   padding: 30px;
