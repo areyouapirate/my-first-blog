@@ -82,7 +82,18 @@ $('#container-floating').on("touchstart", function (e) {
         return false; //extra, and to make sure the function has consistent return points
     }
 });
+
+$(document).on("touchstart", function (e) {
+    "use strict"; //satisfy the code inspectors
+    var link = $('#container-floating'); //preselect the link
+    if (link.hasClass('hover')) {
+    	link.removeClass('hover')
+        return false;
+    }
+});
 </script>
 
 
 {% endblock %}
+
+
