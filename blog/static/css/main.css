@@ -291,7 +291,7 @@ h3{
   padding: 30px;
 }
 
-#container-floating:hover .plus{
+#container-floating:hover, #container-floating.hover  .plus{
   animation: plus-in 0.15s linear;
   animation-fill-mode: forwards;
 }
@@ -313,7 +313,7 @@ h3{
   animation: edit-out 0.3s;
 }
 
-#container-floating:hover .edit{
+#container-floating:hover, #container-floating.hover .edit{
   animation: edit-in 0.2s;
    animation-delay: 0.1s;
   animation-fill-mode: forwards;
@@ -397,19 +397,19 @@ h3{
     to {opacity: 0; transform: scale(0);}
 }
 
-#container-floating:hover .nds{
+#container-floating:hover, #container-floating.hover .nds{
   
   animation: bounce-nds 0.1s linear;
   animation-fill-mode:  forwards;
 }
 
-#container-floating:hover .nd3{
+#container-floating:hover, #container-floating.hover .nd3{
   animation-delay: 0.08s;
 }
-#container-floating:hover .nd4{
+#container-floating:hover, #container-floating.hover .nd4{
   animation-delay: 0.15s;
 }
-#container-floating:hover .nd5{
+#container-floating:hover, #container-floating.hover .nd5{
   animation-delay: 0.2s;
 }
 
