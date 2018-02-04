@@ -1,23 +1,29 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <section class="about" id="about">
-        <div class="container">
-            <div class="features_list">
-                {% if request.user.registration_date %}
+<div class="container" style="margin-top: 60px;">
+    <div class="flex-row row animated bounceInUp">
+        <div class="col-xs-6 col-sm-4 col-lg-3">
+            <div class="thumbnail">
+            {% if request.user.registration_date %}
                 <div class="date">
                     {{ request.user.registration_date }} 
                 </div>
-                {% endif %}
+            {% endif %}
+            <div class="caption">
                 <h1>Il tuo profilo</h1>
-                <p>Username: {{ request.user.username }}</p>
-                <p>Gruppo di appartenenza: {{ request.user.profile.gruppo }}</p>
-                <p>Nome: {{ request.user.first_name }}</p>
-                <p>Cognome: {{ request.user.last_name }}</p>
-                <p>Data di nascita: {{ request.user.profile.birth_date }}</p>
-                <p>Email: {{ request.user.email }}</p>
+               
+                <h3>{{ request.user.username }}</h1>
+                <p class="flex-text text-muted">Gruppo di appartenenza: {{ request.user.profile.gruppo }}</p>
+                <p class="flex-text text-muted">Nome: {{ request.user.first_name }}</p>
+                <p class="flex-text text-muted">Cognome: {{ request.user.last_name }}</p>
+                <p class="flex-text text-muted">Data di nascita: {{ request.user.profile.birth_date }}</p>
+                <p class="flex-text text-muted">Email: {{ request.user.email }}</p>
                 <a class="btn btn-default" href="{% url 'logout' %}"> Logout <span class="glyphicon glyphicon-log-out"></span></a>
             </div>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
+
 {% endblock %}

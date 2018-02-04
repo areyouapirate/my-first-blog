@@ -16,16 +16,16 @@
  <!--  Floating Buttons  --> 
 
 
-<div id="container-floating">
+<div id="jstouch" class="menu-floating">
   <a href="{% url 'inscr_list' %}"><div class="nd5 nds" data-toggle="tooltip" data-placement="top" title="Iscrizioni" >
-  	<img class="edit" src="{% static 'img/inscr.png' %}">
-  </div></a>
-  <a href="{% url 'place_list' %}"><div class="nd4 nds" data-toggle="tooltip" data-placement="top" data-original-title="Case e Campi">
-  	<img class="edit" src="{% static 'img/tent.png' %}">
-  </div></a>
-  <a href="/inscr/new"><div class="nd3 nds" data-toggle="tooltip" data-placement="top" data-original-title="Nuova Iscrizione">
-  <img class="edit" src="{% static 'img/plus.png' %}">
-  </div></a>
+  	<a href="{% url 'inscr_list' %}"><img class="edit" src="{% static 'img/inscr.png' %}"></a>
+  </div>
+  <div class="nd4 nds" data-toggle="tooltip" data-placement="top" data-original-title="Case e Campi">
+  	<a href="{% url 'place_list' %}"><img class="edit" src="{% static 'img/tent.png' %}"></a>
+  </div>
+  <div class="nd3 nds" data-toggle="tooltip" data-placement="top" data-original-title="Nuova Iscrizione">
+  <a href="/inscr/new"><img class="edit" src="{% static 'img/plus.png' %}"></a>
+  </div>
   <div id="floating-button" data-toggle="tooltip" data-placement="top" data-original-title="Nuovo Post">
     <img class="plus" src="{% static 'img/dot.png' %}">
     <a href="{% url 'post_new' %}" ><img class="edit" src="{% static 'img/post.png' %}"></a>
@@ -70,30 +70,25 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
 
-$('#container-floating').on("touchstart", function (e) {
+$('html').on('touchstart', function(e) {
+    $('#jstouch').removeClass('hover')
+});
+$('#jstouch').on("touchstart", function (e) {
+	e.stopPropagation();
     "use strict"; //satisfy the code inspectors
     var link = $(this); //preselect the link
     if (link.hasClass('hover')) {
         return true;
-    } else {
+    } 
+    else {
         link.addClass("hover");
-        $('#container-floating').not(this).removeClass("hover");
+        $('#jstouch').not(this).removeClass("hover");
         e.preventDefault();
-        return false; //extra, and to make sure the function has consistent return points
-    }
-});
 
-$(document).on("touchstart", function (e) {
-    "use strict"; //satisfy the code inspectors
-    var link = $('#container-floating'); //preselect the link
-    if (link.hasClass('hover')) {
-    	link.removeClass('hover')
-        return false;
+        return false; //extra, and to make sure the function has consistent return points
     }
 });
 </script>
 
 
 {% endblock %}
-
-

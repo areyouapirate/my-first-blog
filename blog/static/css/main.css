@@ -242,7 +242,7 @@ h3{
 }
 
 
-
+/*		floating menu 		*/
 #floating-button{
   width: 55px;
   height: 55px;
@@ -272,7 +272,7 @@ h3{
   transition: all 0.3s;
 }
 
-#container-floating{
+.menu-floating{
   position: absolute;
   width: 70px;
   height: 70px;
@@ -281,17 +281,25 @@ h3{
   z-index: 50px;
 }
 
-#container-floating:hover, #container-floating.hover{
+.menu-floating:hover {
+  height: 90px;
+  width: 400px;
+  padding: 30px;
+}
+.menu-floating.hover{
   height: 90px;
   width: 400px;
   padding: 30px;
 }
 
-#container-floating:hover, #container-floating.hover  .plus{
+.menu-floating:hover .plus{
   animation: plus-in 0.15s linear;
   animation-fill-mode: forwards;
 }
-
+.menu-floating.hover .plus{
+  animation: plus-in 0.15s linear;
+  animation-fill-mode: forwards;
+}
 .edit{
   position: absolute;
   top: 0;
@@ -309,7 +317,12 @@ h3{
   animation: edit-out 0.3s;
 }
 
-#container-floating:hover, #container-floating.hover .edit{
+.menu-floating:hover .edit{
+  animation: edit-in 0.2s;
+   animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+}
+.menu-floating.hover .edit{
   animation: edit-in 0.2s;
    animation-delay: 0.1s;
   animation-fill-mode: forwards;
@@ -393,19 +406,33 @@ h3{
     to {opacity: 0; transform: scale(0);}
 }
 
-#container-floating:hover, #container-floating.hover .nds{
+.menu-floating:hover .nds{
+  
+  animation: bounce-nds 0.1s linear;
+  animation-fill-mode:  forwards;
+}
+.menu-floating.hover .nds{
   
   animation: bounce-nds 0.1s linear;
   animation-fill-mode:  forwards;
 }
 
-#container-floating:hover, #container-floating.hover .nd3{
+.menu-floating:hover .nd3{
   animation-delay: 0.08s;
 }
-#container-floating:hover, #container-floating.hover .nd4{
+.menu-floating.hover .nd3{
+  animation-delay: 0.08s;
+}
+.menu-floating:hover .nd4{
   animation-delay: 0.15s;
 }
-#container-floating:hover, #container-floating.hover .nd5{
+.menu-floating.hover .nd4{
+  animation-delay: 0.15s;
+}
+.menu-floating:hover .nd5{
+  animation-delay: 0.2s;
+}
+.menu-floating.hover .nd5{
   animation-delay: 0.2s;
 }
 
@@ -425,8 +452,7 @@ h3{
 
 
 
-
-
+/*		Post list section 		*/
 
 
 .flex-row {
@@ -462,8 +488,12 @@ h3{
 	.flex-row  {
     padding-left: 0px;
     padding-right: 0px;
-  }
+    }
+
 }
+
+
+
 
 
 .container{
@@ -499,7 +529,6 @@ h3{
 	background-color: #41c17d;
 	position: relative;
 	display: block;
-
 }
 
 .footer .rightbutton{
@@ -509,7 +538,6 @@ h3{
 }
 
 .footer .right_icon{
-
 	float: right;
 	background: #ffffff;
 	padding: 5px 10px;
@@ -517,11 +545,9 @@ h3{
 	color: #43b779;
 	font-family: "open_regular", Helvetica, Arial, sans-serif;
 	font-size: 14px;
-
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-
 	margin: 15px 0px 20px 20px;
 }
 
@@ -544,13 +570,6 @@ h3{
 }
 
 
-
-
-
-
-
-
-
 /*		Responsive CSS 		*/
 
 @media (max-width: 360px) {
@@ -561,6 +580,18 @@ h3{
 }
 
 @media (max-width: 767px) {
+	.footer .rightbutton{
+	position: relative;
+	right: 10px;
+	bottom: 0px;
+}
+
+	.postdetail .text{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    text-align: center;
+    }
 
 	.postdetail .date{
 		display: block;
