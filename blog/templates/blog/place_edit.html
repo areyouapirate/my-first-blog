@@ -2,9 +2,9 @@
 {% load widget_tweaks %}
 {{ form.media }}
 {% block content %}
-<section class="about" id="about">
-  <div class="container">
-    <div class="features_list">
+
+  <div class="container" style="margin-top: 20px;">
+
   <form method="POST">{% csrf_token %}
     <div class="well">
       <h4 style="margin-top: 0">Nuovo posto</h4>
@@ -49,8 +49,8 @@
       <button type="submit" class="save btn btn-default">Save</button>
     </div>
   </form>
-    </div>
+
   </div>
-</section>
+
 {% endblock %}
 

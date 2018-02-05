@@ -113,7 +113,7 @@ header .burger_icon{
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 
-	margin: 45px 10px 0 0;
+	margin: 30px 10px 0 0;
 }
 
 header .burger_icon:hover{
@@ -514,10 +514,57 @@ h3{
 }
 
 
+.place{
+	color: #4c4c4c;
+	font-family: "open_regular", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 30px;
+	margin: 50px 50px 50px 50px ;
+	display: block;
 
+}
 
+#prof {
 
+	height: 450px;
+	width: 350px;
+}
+#login {
 
+	height: 450px;
+	width: 360px;
+}
+
+input[type=text], select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=password], select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 /*		Footer 		*/
 
 
@@ -580,10 +627,20 @@ h3{
 }
 
 @media (max-width: 767px) {
+
+
+	header{
+	height: 90px;
+	}
+	header .logo{
+	display: table-cell;
+	margin: 18px 0px 0 0;
+}
 	.footer .rightbutton{
 	position: relative;
 	right: 10px;
 	bottom: 0px;
+	margin-right: 5px;
 }
 
 	.postdetail .text{
@@ -592,6 +649,13 @@ h3{
     font-size: 14px;
     text-align: center;
     }
+    .place{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    text-align: center;
+    }
+
 
 	.postdetail .date{
 		display: block;
@@ -601,9 +665,7 @@ h3{
 	}
 
 	/*		Header 		*/
-	header .logo{
-		margin-right: 0;
-	}
+
 
 	header .burger_icon{
 		display: block;
@@ -614,7 +676,7 @@ h3{
 		float: none;
 		background: #47ad76;
 		position: absolute;
-		margin-top: 130px;
+		margin-top: 90px;
 		left: 0;
 		display: none;
 	}
@@ -623,7 +685,7 @@ h3{
 		float: none;
 		background: #47ad76;
 		position: absolute;
-		margin-top: 319px;
+		margin-top: 279px;
 		left: 0;
 		display: none;
 	}
@@ -685,13 +747,7 @@ h3{
 		margin-left: 0;
 	}
 
-	.app_store_btn{
-		display: block;
-		width: 90%;
-		padding-left: 0;
-		padding-right: 0;
-		text-align: center;
-	}
+
 
 
 

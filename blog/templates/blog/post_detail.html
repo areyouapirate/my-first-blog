@@ -36,7 +36,9 @@
             {% endif %}
             <div class="text" >
             <p  >{{ post.text|linebreaksbr }}</p>   
+            {% if post.approval %}
             <div  >Post approvato da: {{ post.approval }}</div>
+            {% endif %}
             {% if post.published_date %}
                 <div >
                     {{ post.published_date }} 

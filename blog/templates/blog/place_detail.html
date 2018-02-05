@@ -10,9 +10,9 @@
 {% block content %}
 
 <!--  App Features Section  -->
-    <section class="about" id="about">
+
         <div class="container">
-            <div class="features_list">
+            <div class="weel place">
                 {% if place.published_date %}
                 <div class="date">
                     {{ place.published_date }}
@@ -26,7 +26,7 @@
                 <p>Ultimo gruppo che ha visitato il posto  = {{ place.last_group }}</p>
                 <p>Contatti  = {{ place.contacts }}</p>
                 <p>Descrizione  = {{ place.description }}</p>
-                <div id="map"></div>
+                <div id="map" style="margin-top: 30px;"></div>
                 <script>
                     function initMap() {
                         var place = {lat: {{ place.coordinates.y }}, lng: {{ place.coordinates.x }}};
@@ -51,8 +51,9 @@
                 {% endif %}
             </div>
         </div>
-    </section>
+
     <!--  And App Features Section  -->
+
 
 
 
