@@ -527,15 +527,30 @@ h3{
 #prof {
 
 	height: 450px;
-	width: 350px;
+	max-width: 320px;
 }
 #login {
 
 	height: 450px;
-	width: 360px;
+	max-width: 320px;
+}
+#signup {
+
+	max-width: 370px;
 }
 
+
 input[type=text], select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=email], select {
     width: 100%;
     max-width: 300px;
     padding: 12px 20px;
@@ -566,6 +581,21 @@ input[type=submit] {
     cursor: pointer;
 }
 /*		Footer 		*/
+
+
+  
+  input[type="submit"] {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    background: #41D873;
+    color: white;
+    border: 0;
+    padding: 20px;
+    font-size: 1.2rem;
+  }
+  
+}
 
 
 

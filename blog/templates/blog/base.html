@@ -27,11 +27,8 @@
 	<div style="max-width: 1200px; margin-left:auto; margin-right:auto; background-color: white;">
 
 
-
-
-
 <div id="modalsignup" class="modal fade" >
-    <div  class="modal-dialog">
+    <div id="signup" class="modal-dialog">
     	<div  class="modal-content">
     	<div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -41,11 +38,11 @@
       </div>
         <div class="modal-body">
             
-      <form action="{% url 'signup' %}" method="post" data-validate-username-url="/ajax/validate_username/">
-            <p id="valid_username"></p>
-    				<input type='hidden' name='csrfmiddlewaretoken' value='CP5BYOY9Vhbpa1dhwg0AekFqaHvvq520' />
-    				<p><label for="id_username">Username:</label> <input id="id_username" maxlength="30" name="username" type="text" /> <span class="helptext"> Meno di 30 caratteri. Ammesse soltanto lettere, numeri e @/./+/-/_.</span></p>
-<p><label for="id_gruppo">Gruppo:</label> <select id="id_gruppo" name="gruppo">
+      <form action="{% url 'signup' %}" method="POST" data-validate-username-url="/ajax/validate_username/">{% csrf_token %}
+           
+            
+    				<p> <input placeholder="Username" required id="id_username" name="username" type="text" /> <div class="registrationFormAlert" id="divCheckUsername"></div> <span class="helptext"> Meno di 30 caratteri. Ammesse soltanto lettere, numeri e @/./+/-/_.</span></p>
+<label for="id_gruppo">Gruppo:</label> <p><select id="id_gruppo" name="gruppo" >
 <option value="None">Nessuno</option>
 <option value="PT1">Pistoia 1</option>
 <option value="PT2">Pistoia 2</option>
@@ -57,9 +54,9 @@
 <option value="CU1">Chiesina Uzzanese 1</option>
 <option value="UZ 1">Uzzano 1</option>
 </select></p>
-<p><label for="id_first_name">Nome:</label> <input id="id_first_name" maxlength="30" name="first_name" type="text" /></p>
-<p><label for="id_last_name">Cognome:</label> <input id="id_last_name" maxlength="30" name="last_name" type="text" /></p>
-<p><label for="id_birth_date_month">Data di nascita:</label> <select id="id_birth_date_month" name="birth_date_month" style="width: 150px;">
+<p> <input placeholder="Nome" required="" id="id_first_name" maxlength="30" name="first_name" type="text" /></p>
+<p> <input placeholder="Cognome" required id="id_last_name" maxlength="30" name="last_name" type="text" /></p>
+<label for="id_birth_date_month">Data di nascita:</label><p> <select id="id_birth_date_month" name="birth_date_month" style="width: 150px;">
 <option value="1">Gennaio</option>
 <option value="2">Febbraio</option>
 <option value="3">Marzo</option>
@@ -191,10 +188,10 @@
 <option value="2009">2009</option>
 <option value="2010">2010</option>
 </select></p>
-<p><label for="id_email">Email:</label> <input id="id_email" maxlength="254" name="email" type="email" /> <span class="helptext">Obbligatoria. Inserire un account valido.</span></p>
-<p><label for="id_password1">Password:</label> <input id="id_password1" name="password1" type="password" /></p>
-<p><label for="id_password2">Conferma password:</label> <input id="id_password2" name="password2" type="password" /> <span class="helptext">Inserisci la stessa password di prima per sicurezza.</span></p>
-    				<button type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button>
+<p> <input placeholder="Email" required id="id_email" maxlength="254" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" /> </p><div >Obbligatoria. Inserire un account valido.</div>
+<p> <input placeholder="Password" required id="id_password1" name="password1" type="password" /></p>
+<p> <input placeholder="Conferma Password" required id="id_password2" name="password2" type="password" /> <div class="registrationFormAlert" id="divCheckPasswordMatch"></div></p>
+    				<button id="register" type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button>
   				</form>
         </div>
         
@@ -327,6 +324,40 @@
   	$(".signup").click(function () {
     	$("#modalsignup").modal("show");
   	});
+
+    
+    $('input[name=password2]').keyup(function () {
+    'use strict';
+
+    if ($('input[name=password1]').val() === $(this).val()) {
+        $('#divCheckPasswordMatch').html('Le password coincidono');
+        this.setCustomValidity('');
+    } else {
+        $('#divCheckPasswordMatch').html('Le password non coincidono!');
+        this.setCustomValidity('Le password devono coincidere!');
+    }
+});
+    $("#id_username").keyup(function () {
+    	'use strict';
+      	var username = $(this).val();
+      	$.ajax({
+	        url: '/ajax/validate_username/',
+	        data: {
+	          'username': username
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+	          	if (data.is_taken) {
+	          		$("#divCheckUsername").html("Esiste gia' un utente con quel username!");
+	          		$("#id_username")[0].setCustomValidity('Cambia nome!');
+	          	}
+	          	else{
+	          		$("#divCheckUsername").html("");
+	          		$("#id_username")[0].setCustomValidity('');
+	          	}
+        	}
+      	});
+    });
   	</script>
   	{% block javascript %}
 	{% endblock %}

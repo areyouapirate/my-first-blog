@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
 from .models import Post, Inscription, Place
@@ -178,6 +178,7 @@ def signup(request):
             return redirect('account_activation_sent')
     else:
         form = SignUpForm()
+        return HttpResponse("error")
     return render(request, 'blog/signup.html', {'form': form})
 def account_activation_sent(request):
     return render(request, 'blog/account_activation_sent.html')
