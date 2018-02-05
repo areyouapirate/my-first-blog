@@ -9,7 +9,7 @@
     height: 490px;
     margin-top: -70px;
     background: url('{{ post.img.url }}') no-repeat fixed center center;   
-
+    padding-top: -50px;
 }
 </style>
 {% endif %}
@@ -47,11 +47,11 @@
             </div>
         </div>
     </div>
-    </div>
-
 </div>
+
+
     <!--  Footer Section  -->
-    <div class="footer">
+    <div class="modfoot">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }} 
@@ -68,6 +68,7 @@
                 <a  href=""><span class="right_icon">{{ post.gruppo }}</span></a>
                 {% endif %}
         </div>
+    </div>
 
     <!--  End Footer Section  -->
 {% endblock %}

@@ -196,11 +196,12 @@ header nav li a:focus{
 }
 
 .hero2 .caption p{
-	color: #adadad;
-	text-shadow: 1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+	color: #ffffff;
+	text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
 	font-family: "open_regular", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 30px;
+	font-weight: bold;
 	margin: 15px 0 35px 0;
 }
 
@@ -464,7 +465,13 @@ h3{
 	flex-direction: column;
 }
 
-.flex-row .thumbnail,
+.flex-row .thumbnail {
+	flex-direction: column;
+	display: flex;
+	flex: 1 0 auto;
+	height: auto;
+	position: relative;
+}
 .flex-row .caption {
 	flex-direction: column;
 	display: flex;
@@ -525,20 +532,26 @@ h3{
 }
 
 #prof {
-
+	position: relative;
 	height: 450px;
-	max-width: 320px;
-}
-#login {
-
-	height: 450px;
-	max-width: 320px;
-}
-#signup {
-
 	max-width: 370px;
 }
+#login {
+	position: relative;
+	height: 450px;
+	max-width: 370px;
+}
+#signup {
+	position: relative;
+	max-width: 370px;
+}
+.modal {
+   max-width: 370px;
+   position: absolute;
+   left: 50%;
+   margin-left: -180px;
 
+}
 
 input[type=text], select {
     width: 100%;
@@ -580,11 +593,7 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
-/*		Footer 		*/
-
-
-  
-  input[type="submit"] {
+input[type="submit"] {
     display: block;
     width: 100%;
     margin: 20px 0;
@@ -593,28 +602,27 @@ input[type=submit] {
     border: 0;
     padding: 20px;
     font-size: 1.2rem;
-  }
-  
 }
+/*		Footer 		*/
 
 
-
-.footer{
+.modfoot {
     height:65px;
     width:100%;
     max-width: 1200px;
+    z-index: 100px;
 	background-color: #41c17d;
 	position: relative;
 	display: block;
 }
 
-.footer .rightbutton{
+.modfoot .rightbutton{
 	position: relative;
 	right: 30px;
 	bottom: 30px;
 }
 
-.footer .right_icon{
+.modfoot .right_icon{
 	float: right;
 	background: #ffffff;
 	padding: 5px 10px;
@@ -628,16 +636,16 @@ input[type=submit] {
 	margin: 15px 0px 20px 20px;
 }
 
-.footer .right_icon:hover{
+.modfoot .right_icon:hover{
 	cursor: pointer;
 }
 
 
-.footer .right_icon.active{
+.modfoot .right_icon.active{
 	background: #359663;
 	color: #ffffff;
 }
-.footer .date{
+.modfoot .date{
 	position: relative;
 	margin-left: 80px;
 	color: #fff;
@@ -666,7 +674,7 @@ input[type=submit] {
 	display: table-cell;
 	margin: 18px 0px 0 0;
 }
-	.footer .rightbutton{
+	.modfoot .rightbutton{
 	position: relative;
 	right: 10px;
 	bottom: 0px;
@@ -690,7 +698,7 @@ input[type=submit] {
 	.postdetail .date{
 		display: block;
 	}
-	.footer .date{
+	.modfoot .date{
 		display: none;
 	}
 
@@ -752,20 +760,7 @@ input[type=submit] {
 	}
 
 
-	td.col_3{
-        display:none;
-        width:0;
-        height:0;
-        opacity:0;
-        visibility: collapse;
-    }
-	th.col_3{
-        display:none;
-        width:0;
-        height:0;
-        opacity:0;
-        visibility: collapse;
-    } 
+	
 
 
 
