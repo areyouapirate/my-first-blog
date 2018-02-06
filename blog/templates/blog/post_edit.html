@@ -78,7 +78,7 @@
                 {% render_field form.text class="form-control" %} 
             </div> 
           </div>
-          <div class="row flex-row">
+          <div class="row flex-row" style="margin-bottom: 20px;">
             <div class="form-group col-xs-3 col-sm-5 col-md-4">
                 <h5>Immagine</h5>
                 {% render_field form.img class="form-control" %}
@@ -104,9 +104,9 @@
           </div>
           </div>
           {% if post %}
-          <button type="button" class="btn btn-default catastrofe" style="float: right;">Elimina Post</button>
+          <button type="button" class="btn btn-default catastrofe" style="background: #ff807a;float: right;">Elimina Post</button>
           {% endif %}
-        <button type="save" class="save btn btn-primary ">Save</button>
+        <button type="save" class="save btn btn-default " style=" margin-bottom: 20px;">Save</button>
         </div>
       </form>
     </div>  

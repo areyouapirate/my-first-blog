@@ -26,80 +26,80 @@
 
 <body>
 	<div id="modalsignup" class="modal fade" >
-    <div id="signup" class="modal-dialog">
-    	<div  class="modal-content">
-    	<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h2 class="modal-title">Form di registrazione</h2>
-      </div>
-        <div class="modal-body">
-            
-      <form action="{% url 'signup' %}" method="POST" data-validate-username-url="/ajax/validate_username/">{% csrf_token %}
-           
-            
-    				<p> <input placeholder="Username" required id="id_username" name="username" type="text" /> <div class="registrationFormAlert" id="divCheckUsername"></div> <div> <p> Meno di 30 caratteri.</p> <p> Ammesse soltanto lettere, numeri e @/./+/-/_.</p></div></p>
-					<label for="id_gruppo">Gruppo:</label> <p><select id="id_gruppo" name="gruppo" >
-					<option value="None">Nessuno</option>
-					<option value="PT1">Pistoia 1</option>
-					<option value="PT2">Pistoia 2</option>
-					<option value="PT3">Pistoia 3</option>
-					<option value="PT4">Pistoia 4</option>
-					<option value="SG1">San Giorgio 1</option>
-					<option value="QU1">Quarrata 1</option>
-					<option value="MC1">Massa e Cozzile 1</option>
-					<option value="CU1">Chiesina Uzzanese 1</option>
-					<option value="UZ 1">Uzzano 1</option>
-					</select></p>
-					<p> <input placeholder="Nome" required="" id="id_first_name" maxlength="30" name="first_name" type="text" /></p>
-					<p> <input placeholder="Cognome" required id="id_last_name" maxlength="30" name="last_name" type="text" /></p>
-					<label for="id_birth_date_month">Data di nascita:</label><p> <select id="id_birth_date_month" name="birth_date_month" style="width: 125px;">
-					<option value="1">Gennaio</option>
-					<option value="2">Febbraio</option>
-					<option value="3">Marzo</option>
-					<option value="4">Aprile</option>
-					<option value="5">Maggio</option>
-					<option value="6">Giugno</option>
-					<option value="7">Luglio</option>
-					<option value="8">Agosto</option>
-					<option value="9">Settembre</option>
-					<option value="10">Ottobre</option>
-					<option value="11">Novembre</option>
-					<option value="12">Dicembre</option>
-					</select>
-					<select id="id_birth_date_day" name="birth_date_day" style="width: 70px;>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
+		<div id="signup" class="modal-dialog">
+			<div  class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h2 class="modal-title">Form di registrazione</h2>
+				</div>
+				<div class="modal-body">
+					
+					<form action="{% url 'signup' %}" method="POST" data-validate-username-url="/ajax/validate_username/">{% csrf_token %}
+						
+						
+						<p> <input placeholder="Username" required id="id_username" name="username" type="text" /> <div class="registrationFormAlert" id="divCheckUsername"></div> <div> <p> Meno di 30 caratteri.</p> <p> Ammesse soltanto lettere, numeri e @/./+/-/_.</p></div></p>
+						<label for="id_gruppo">Gruppo:</label> <p><select id="id_gruppo" name="gruppo" >
+							<option value="None">Nessuno</option>
+							<option value="PT1">Pistoia 1</option>
+							<option value="PT2">Pistoia 2</option>
+							<option value="PT3">Pistoia 3</option>
+							<option value="PT4">Pistoia 4</option>
+							<option value="SG1">San Giorgio 1</option>
+							<option value="QU1">Quarrata 1</option>
+							<option value="MC1">Massa e Cozzile 1</option>
+							<option value="CU1">Chiesina Uzzanese 1</option>
+							<option value="UZ 1">Uzzano 1</option>
+						</select></p>
+						<p> <input placeholder="Nome" required="" id="id_first_name" maxlength="30" name="first_name" type="text" /></p>
+						<p> <input placeholder="Cognome" required id="id_last_name" maxlength="30" name="last_name" type="text" /></p>
+						<label for="id_birth_date_month">Data di nascita:</label><p> <select id="id_birth_date_month" name="birth_date_month" style="width: 125px;">
+							<option value="1">Gennaio</option>
+							<option value="2">Febbraio</option>
+							<option value="3">Marzo</option>
+							<option value="4">Aprile</option>
+							<option value="5">Maggio</option>
+							<option value="6">Giugno</option>
+							<option value="7">Luglio</option>
+							<option value="8">Agosto</option>
+							<option value="9">Settembre</option>
+							<option value="10">Ottobre</option>
+							<option value="11">Novembre</option>
+							<option value="12">Dicembre</option>
+						</select>
+						<select id="id_birth_date_day" name="birth_date_day" style="width: 70px;>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
 					</select>
 					<select id="id_birth_date_year" name="birth_date_year" style="width: 100px;>
 					<option value="1928">1928</option>
@@ -185,135 +185,135 @@
 					<option value="2008">2008</option>
 					<option value="2009">2009</option>
 					<option value="2010">2010</option>
-					</select></p>
-					<p> <input placeholder="Email" required id="id_email" maxlength="254" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" /> </p><div >Obbligatoria. Inserire un account valido.</div>
-					<p> <input placeholder="Password" required id="id_password1" name="password1" type="password" /></p>
-					<p> <input placeholder="Conferma Password" required id="id_password2" name="password2" type="password" /> <div class="registrationFormAlert" id="divCheckPasswordMatch"></div></p>
-    				<div class="modal-footer">
-    				<button class="btn btn-default" id="register" type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button></div>
-  				</form>
-        </div>
-        
-        </div>
-    </div>
+				</select></p>
+				<p> <input placeholder="Email" required id="id_email" maxlength="254" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" /> </p><div >Obbligatoria. Inserire un account valido.</div>
+				<p> <input placeholder="Password" required id="id_password1" name="password1" type="password" /></p>
+				<p> <input placeholder="Conferma Password" required id="id_password2" name="password2" type="password" /> <div class="registrationFormAlert" id="divCheckPasswordMatch"></div></p>
+				<div class="modal-footer">
+					<button class="btn btn-default" id="register" type="submit"><span class="glyphicon glyphicon-registration-mark"></span> Registrati </button></div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
 
 </div>
 
 <div id="modallogin" class="modal fade" >
-    <div id="login" class="modal-dialog">
-    	<div  class="modal-content">
-    	<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h1 class="modal-title">Login</h4>
-      </div>
-        <div class="modal-body" style="display:table-cell; vertical-align:middle;">
-            
-      <form action="{% url 'login' %}" method="POST">{% csrf_token %}
-        <input id="username-field" name="username" type="text" />
-        <input id="password-field" name="password" type="password" />
-        <div class="modal-footer">
-		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Login </button></div>
-    </form>
-        </div>
-        
-        </div>
-    </div>
-
-</div>
-
-<div id="modalprofile" class="modal fade" >
-    <div id="prof" class="modal-dialog">
-    	<div  class="modal-content">
-    	<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h1 class="modal-title">Il tuo profilo</h4>
-      </div>
-        <div class="modal-body">    
-            {% if request.user.registration_date %}
-                <div class="date">
-                    {{ request.user.registration_date }} 
-                </div>
-            {% endif %}
-                <h3>{{ request.user.username }}</h1>
-                <p class="flex-text text-muted">Gruppo di appartenenza: {{ request.user.profile.gruppo }}</p>
-                <p class="flex-text text-muted">Nome: {{ request.user.first_name }}</p>
-                <p class="flex-text text-muted">Cognome: {{ request.user.last_name }}</p>
-                <p class="flex-text text-muted">Data di nascita: {{ request.user.profile.birth_date }}</p>
-                <p class="flex-text text-muted">Email: {{ request.user.email }}</p>
-        </div>
-        <div class="modal-footer">
-        	<a class="btn btn-default" href="{% url 'logout' %}"> Logout <span class="glyphicon glyphicon-log-out"></span></a>
-        </div>
-        </div>
-    </div>
-</div>
-    <div style="min-height: calc(100vh - 110px); max-width: 1230px; margin-left:auto; margin-right:auto; background-color: #685332; box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.7), 0 30px 50px 0 rgba(0, 0, 0, 0.7);">
-	<div style="min-height: calc(100vh - 110px); max-width: 1200px; margin-left:auto; margin-right:auto; background-color: white;">
-
-
-
-
-	<!--  Header Section  -->
-	<header>
-		<div class="container">
-			<div class="logo pull-left animated fadeInLeft">
-				<a href="/"><img src="{% static 'img/logo5.png' %}" alt="" title=""></a>
+	<div id="login" class="modal-dialog">
+		<div  class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h1 class="modal-title">Login</h4>
+				</div>
+				<div class="modal-body" style="display:table-cell; vertical-align:middle;">
+					
+					<form action="{% url 'login' %}" method="POST">{% csrf_token %}
+						<input id="username-field" name="username" type="text" />
+						<input id="password-field" name="password" type="password" />
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Login </button></div>
+						</form>
+					</div>
+					
+				</div>
 			</div>
-			<nav class="pull-left">
-				<li class="animated wow fadeIn" data-wow-delay="0s"><a href="#">Chi siamo</a></li>
-				<li class="animated wow fadeIn" data-wow-delay=".1s"><a href="#">Dove siamo</a></li>
-				<li class="animated wow fadeIn" data-wow-delay=".2s"><a href="#">Contatti</a></li>
-			</nav>
-			{% if user.is_authenticated %}
-			<nav class="pull-right">
-					<li class="animated wow fadeIn profile" data-wow-delay=".3s"><a href="#"> {{ request.user.username }} <img src="{% static 'img/user1.png' %}" alt="" title=""></a></li>
-			</nav>
-			{% else %}
-			<nav class="pull-right">
-				<div>
-					<li class="animated wow fadeInRight signup" data-wow-delay="0s"><a href="#"> Registrati </a></li>
-				</div>
-				<div>
-					<li class="animated wow fadeInRight login" data-wow-delay="0s"><a href="#"> Login </a></li>
-				</div>
-			</nav>
-			{% endif %}
-			<span class="burger_icon">menu</span>
+
 		</div>
-	</header>
-	<!--  End Header Section  -->
+
+		<div id="modalprofile" class="modal fade" >
+			<div id="prof" class="modal-dialog">
+				<div  class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h1 class="modal-title">Il tuo profilo</h4>
+						</div>
+						<div class="modal-body">    
+							{% if request.user.registration_date %}
+							<div class="date">
+								{{ request.user.registration_date }} 
+							</div>
+							{% endif %}
+							<h3>{{ request.user.username }}</h1>
+								<p class="flex-text text-muted">Gruppo di appartenenza: {{ request.user.profile.gruppo }}</p>
+								<p class="flex-text text-muted">Nome: {{ request.user.first_name }}</p>
+								<p class="flex-text text-muted">Cognome: {{ request.user.last_name }}</p>
+								<p class="flex-text text-muted">Data di nascita: {{ request.user.profile.birth_date }}</p>
+								<p class="flex-text text-muted">Email: {{ request.user.email }}</p>
+							</div>
+							<div class="modal-footer">
+								<a class="btn btn-default" href="{% url 'logout' %}"> Logout <span class="glyphicon glyphicon-log-out"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="min-height: calc(100vh - 110px); max-width: 1230px; margin-left:auto; margin-right:auto; background-color: #685332; box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.7), 0 30px 50px 0 rgba(0, 0, 0, 0.7);">
+					<div style="min-height: calc(100vh - 110px); max-width: 1200px; margin-left:auto; margin-right:auto; background-color: white;">
 
 
 
-	<div style="min-height: calc(100vh - 130px); background: white;">
-	{% block content %}
-	{% endblock %}		
-	</div>
 
-	</div>
-	</div>
-	
-	<script src="{% static 'js/bootstrap.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/cropper.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/wow.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/parallax.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-	
+						<!--  Header Section  -->
+						<header>
+							<div class="container">
+								<div class="logo pull-left animated fadeInLeft">
+									<a href="/"><img src="{% static 'img/logo5.png' %}" alt="" title=""></a>
+								</div>
+								<nav class="pull-left">
+									<li class="animated wow fadeIn" data-wow-delay="0s"><a href="#">Chi siamo</a></li>
+									<li class="animated wow fadeIn" data-wow-delay=".1s"><a href="#">Dove siamo</a></li>
+									<li class="animated wow fadeIn" data-wow-delay=".2s"><a href="#">Contatti</a></li>
+								</nav>
+								{% if user.is_authenticated %}
+								<nav class="pull-right">
+									<li class="animated wow fadeIn profile" data-wow-delay=".3s"><a href="#"> {{ request.user.username }} <img src="{% static 'img/user1.png' %}" alt="" title=""></a></li>
+								</nav>
+								{% else %}
+								<nav class="pull-right">
+									<div>
+										<li class="animated wow fadeInRight signup" data-wow-delay="0s"><a href="#"> Registrati </a></li>
+									</div>
+									<div>
+										<li class="animated wow fadeInRight login" data-wow-delay="0s"><a href="#"> Login </a></li>
+									</div>
+								</nav>
+								{% endif %}
+								<span class="burger_icon">menu</span>
+							</div>
+						</header>
+						<!--  End Header Section  -->
 
-    {# JQUERY FILE UPLOAD SCRIPTS #}
-	<script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
- 	<script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-  	<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
-  	{# PHOTOS PAGE SCRIPTS #}  	
-  	<script src="{% static 'js/basic-upload.js' %}"></script>
 
-  	{% block javascript %}
-	{% endblock %}
+						<div style="min-height: calc(100vh - 130px); background: white;">
+							{% block content %}
+							{% endblock %}		
+						</div>
 
-</body>
-</html>
+					</div>
+				</div>
+				
+				<script src="{% static 'js/bootstrap.js' %}"></script>
+				<script type="text/javascript" src="{% static 'js/cropper.min.js' %}"></script>
+				<script type="text/javascript" src="{% static 'js/wow.js' %}"></script>
+				<script type="text/javascript" src="{% static 'js/parallax.js' %}"></script>
+				<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+				
+
+				{# JQUERY FILE UPLOAD SCRIPTS #}
+				<script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+				<script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+				<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+				{# PHOTOS PAGE SCRIPTS #}  	
+				<script src="{% static 'js/basic-upload.js' %}"></script>
+
+				{% block javascript %}
+				{% endblock %}
+
+			</body>
+			</html>
