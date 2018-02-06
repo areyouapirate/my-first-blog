@@ -1,4 +1,76 @@
 $(document).ready(function(){
+	$("input").attr("required", true);
+	$("textarea").attr("required", true);
+	$("#id_img").attr("required", false);
+	
+	$("#id_text").attr("rows", '15');
+	$('[data-toggle="tooltip"]').tooltip();
+
+	$('html').on('touchstart', function(e) {
+    $('#jstouch').removeClass('hover');
+
+
+});
+$('#jstouch').on("touchstart", function (e) {
+	e.stopPropagation();
+    "use strict"; //satisfy the code inspectors
+    var link = $(this); //preselect the link
+    if (link.hasClass('hover')) {
+        return true;
+    } 
+    else {
+        link.addClass("hover");
+        $('#jstouch').not(this).removeClass("hover");
+        e.preventDefault();
+
+        return false; //extra, and to make sure the function has consistent return points
+    }
+});
+
+	$(".profile").click(function () {
+    	$("#modalprofile").modal("show");
+  	});
+  	$(".login").click(function () {
+    	$("#modallogin").modal("show");
+  	});
+  	$(".signup").click(function () {
+    	$("#modalsignup").modal("show");
+  	});
+
+    
+    $('input[name=password2]').keyup(function () {
+    'use strict';
+
+    if ($('input[name=password1]').val() === $(this).val()) {
+        $('#divCheckPasswordMatch').html('Le password coincidono');
+        this.setCustomValidity('');
+    } else {
+        $('#divCheckPasswordMatch').html('Le password non coincidono!');
+        this.setCustomValidity('Le password devono coincidere!');
+    }
+	});
+    $("#id_username").keyup(function () {
+    	'use strict';
+      	var username = $(this).val();
+      	$.ajax({
+	        url: '/ajax/validate_username/',
+	        data: {
+	          'username': username
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+	          	if (data.is_taken) {
+	          		$("#divCheckUsername").html("Esiste gia' un utente con quel username!");
+	          		$("#id_username")[0].setCustomValidity('Cambia nome!');
+	          	}
+	          	else{
+	          		$("#divCheckUsername").html("");
+	          		$("#id_username")[0].setCustomValidity('');
+	          	}
+        	}
+      	});
+    });
+
 
 	//Navigation menu scrollTo
 	$('header nav ul li a').click(function(event){
@@ -65,105 +137,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-	//Nice scroll initialization
-	$("html").niceScroll({
-		scrollspeed: 50,
-		autohidemode : false,
-		cursorwidth : 8,
-		cursorborderradius: 8,
-		cursorborder : "0",
-		background : "rgba(48, 48, 48, .4)",
-		cursorcolor : '#1f1f1f',
-		zindex : 999
-	});
-
-
-
-
-
-
-
-
-	//Testimonials slider initialization
-	$("#tslider").owlCarousel({
-		items : 1,
-		navigation : true,
-		pagination : false,
-		slideSpeed : 300,
-		paginationSpeed : 400,
-		singleItem: true,
-		responsive: true,
-		autoPlay : true,
-		transitionStyle : "fade"
-	});
-
-
-
-
-
-
-
-	//Mailchimp subscription form initialization
-	$('#submit_form').submit(function(){
-		$('#mc_submit').attr('disabled', 'disabled');		
-   		processing('icon', 'loading');
-	});
-
-	if($('#submit_form').length){
-		//Mailchim Subscription form
-		$('#submit_form').ajaxChimp({
-		    callback: chimpResponce
-		});
-	}	
-
-	//Mail chimp callback function
-	function chimpResponce(resp) {
-   		if (resp.result === 'success') {   			
-   			processing('loading', 'icon');
-			$('#mc_submit').removeAttr('disabled', 'disabled');
-	        $('#submit_form #mc-email').val('');
-   			$('#error_msg').hide();
-   			$('#success_msg').show();
-	    }else{		
-   			processing('loading', 'icon');
-   			$('#success_msg').hide();
-   			$('#error_msg').show();
-	    	$('#mc_submit').removeAttr('disabled', 'disabled');
-	    }
-	}
-
-	function processing(hide, show){
-			$('#mc_submit i').removeClass(hide).addClass(show);
-	}
-
-
-
-
-
-
-
-
-	//Popup video
-	$('#play_video').click(function(e){
-		e.preventDefault();	
-
-		var video_link = $(this).data('video');
-		video_link = '<iframe src="' + video_link + '" width="500" height="208" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-
-		$('.about_video').append(video_link).fadeIn(200);
-	});
-
-	$('.close_video').click(function(e){
-		e.preventDefault();	
-
-		$('.about_video').fadeOut(200,function(){
-			$('iframe', this).remove();
-		});
-
-	});
 
 
 

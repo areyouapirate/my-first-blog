@@ -33,8 +33,6 @@
 
 
 <!--  End Floating Buttons  -->
-
-
 </div>
 </section>
 
@@ -53,7 +51,7 @@
 				<div class="caption">
 					<h3>{{ post.title }}</h2>
 					<p class="flex-text text-muted">{{ post.subtitle }} </p>
-					<p><a class="btn btn-primary" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
+					<p><a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
 				</div>
 				<!-- /.caption -->
 			</div>
@@ -65,30 +63,6 @@
 </div>
 <!-- /.container  -->
 
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-
-$('html').on('touchstart', function(e) {
-    $('#jstouch').removeClass('hover')
-});
-$('#jstouch').on("touchstart", function (e) {
-	e.stopPropagation();
-    "use strict"; //satisfy the code inspectors
-    var link = $(this); //preselect the link
-    if (link.hasClass('hover')) {
-        return true;
-    } 
-    else {
-        link.addClass("hover");
-        $('#jstouch').not(this).removeClass("hover");
-        e.preventDefault();
-
-        return false; //extra, and to make sure the function has consistent return points
-    }
-});
-</script>
 
 
 {% endblock %}

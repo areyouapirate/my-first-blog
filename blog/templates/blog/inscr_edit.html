@@ -1,105 +1,116 @@
 {% extends 'blog/base.html' %}
 {% load widget_tweaks %}
+{% load staticfiles %}
 {% block content %}
 <form method="POST">{% csrf_token %}
     <div class="well">
       <h4 style="margin-top: 0">Nuova iscrizione</h4>
-      <div class="row">
-        <div class="form-group col-sm-7 col-md-6">
+      <div class="flex-row row">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           
-          <input placeholder="Nome Genitore" class="form-control" id="id_fn_parent" maxlength="200" name="fn_parent" type="text" />
+          <input required placeholder="Nome Genitore" class="form-control" id="id_fn_parent" maxlength="200" name="fn_parent" type="text" />
         </div>
-        <div class="form-group col-sm-7 col-md-6">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           
-          <input placeholder="Cognome Genitore" class="form-control" id="id_sn_parent" maxlength="200" name="sn_parent" type="text" />
+          <input required placeholder="Cognome Genitore" class="form-control" id="id_sn_parent" maxlength="200" name="sn_parent" type="text" />
         </div>
-        <div class="form-group col-sm-7 col-md-6">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           
-          <input placeholder="Nome Figlio" class="form-control" id="id_fn_child" maxlength="200" name="fn_child" type="text" />
+          <input required placeholder="Nome Figlio" class="form-control" id="id_fn_child" maxlength="200" name="fn_child" type="text" />
         </div>
-        <div class="form-group col-sm-7 col-md-6">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           
-          <input placeholder="Cognome Figlio" class="form-control" id="id_sn_child" maxlength="200" name="sn_child" type="text" />
+          <input required placeholder="Cognome Figlio" class="form-control" id="id_sn_child" maxlength="200" name="sn_child" type="text" />
         </div>
-      
-        <div class="form-group col-sm-7 col-md-6">
+        </div>
+        <div class="flex-row row">
+        <div class="form-group col-xs-8 col-sm-8 col-lg-4">
           <p>Data di nascita:</p>
-          <select display="inline-block" id="id_dob_child_month" name="dob_child_month" style="width: 200px;">
-<option value="1">Gennaio</option>
-<option value="2">Febbraio</option>
-<option value="3">Marzo</option>
-<option value="4">Aprile</option>
-<option value="5">Maggio</option>
-<option value="6">Giugno</option>
-<option value="7">Luglio</option>
-<option value="8">Agosto</option>
-<option value="9">Settembre</option>
-<option value="10">Ottobre</option>
-<option value="11">Novembre</option>
-<option value="12">Dicembre</option>
-</select>
-<select display="inline-block" id="id_dob_child_day" name="dob_child_day" style="width: 50px;">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-<option value="15">15</option>
-<option value="16">16</option>
-<option value="17">17</option>
-<option value="18">18</option>
-<option value="19">19</option>
-<option value="20">20</option>
-<option value="21">21</option>
-<option value="22">22</option>
-<option value="23">23</option>
-<option value="24">24</option>
-<option value="25">25</option>
-<option value="26">26</option>
-<option value="27">27</option>
-<option value="28">28</option>
-<option value="29">29</option>
-<option value="30">30</option>
-<option value="31">31</option>
-</select>
-<select display="inline-block" id="id_dob_child_year" name="dob_child_year" style="width: 100px;">
-<option value="2000">2000</option>
-<option value="2001">2001</option>
-<option value="2002">2002</option>
-<option value="2003">2003</option>
-<option value="2004">2004</option>
-<option value="2005">2005</option>
-<option value="2006">2006</option>
-<option value="2007">2007</option>
-<option value="2008">2008</option>
-<option value="2009">2009</option>
-<option value="2010">2010</option>
-<option value="2011">2011</option>
-<option value="2012">2012</option>
-</select>
+          <div class="flex-row row">
+          <div class="col-xs-5 col-sm-5 col-lg-5">
+          <select display="inline-block" id="id_dob_child_month" name="dob_child_month" style="width: 100%; min-width: 125px; margin-right: 0px;">
+          <option value="1">Gennaio</option>
+          <option value="2">Febbraio</option>
+          <option value="3">Marzo</option>
+          <option value="4">Aprile</option>
+          <option value="5">Maggio</option>
+          <option value="6">Giugno</option>
+          <option value="7">Luglio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Settembre</option>
+          <option value="10">Ottobre</option>
+          <option value="11">Novembre</option>
+          <option value="12">Dicembre</option>
+          </select>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-lg-3">
+          <select display="inline-block" id="id_dob_child_day" name="dob_child_day" style="width: 100%; min-width: 70px; margin-right: 0px;">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          </select>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-lg-4">
+          <select display="inline-block" id="id_dob_child_year" name="dob_child_year" style="width: 100%; min-width: 100px;">
+          <option value="2000">2000</option>
+          <option value="2001">2001</option>
+          <option value="2002">2002</option>
+          <option value="2003">2003</option>
+          <option value="2004">2004</option>
+          <option value="2005">2005</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+          <option value="2010">2010</option>
+          <option value="2011">2011</option>
+          <option value="2012">2012</option>
+          </select>
+          </div>
+          </div>
         </div>
-        <div class="form-group col-sm-7 col-md-6">
-          
-          <input placeholder="Recapito telefonico" class="form-control" id="id_phone_parent" name="phone_parent" type="tel" />
+        <div class="form-group col-xs-5 col-sm-4 col-lg-3">
+          <p>Recapito telefonico:</p>
+          <input required class="form-control" id="id_phone_parent" name="phone_parent" type="tel" pattern="\+?1?\d{9,15}$" />
           <p style="font-size: 12px;">Inserisci il prefisso nazionale prima del numero, per l'italia +39</p>
         </div>
         </div>
-      <div class="row">
-        <div class="form-group col-sm-13 col-md-12">
+      <div class="flex-row row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12">
           
-          <textarea placeholder="Motivazioni" class="form-control" cols="40" id="id_bio_child" name="bio_child" rows="10">
-</textarea>
+          <textarea placeholder="Motivazioni" class="form-control" cols="40" id="id_bio_child" name="bio_child" rows="10"></textarea>
         </div>
-        <div class="form-group col-sm-7 col-md-6">
+      </div>
+      <div class="flex-row row">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           <p>Prima scelta:</p>
           <select class="form-control" id="id_first_choice" name="first_choice">
 <option value="None">Nessuno</option>
@@ -114,7 +125,7 @@
 <option value="UZ 1">Uzzano 1</option>
 </select>
         </div>
-        <div class="form-group col-sm-7 col-md-6">
+        <div class="form-group col-xs-6 col-sm-4 col-lg-3">
           <p>Seconda scelta:</p>
           <select class="form-control" id="id_second_choice" name="second_choice">
 <option value="None">Nessuno</option>
@@ -137,4 +148,33 @@
 
   </div>
 
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/intlTelInput.js' %}"></script>
+  <script>
+    $("#id_phone_parent").intlTelInput({
+      // allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: "body",
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      initialCountry: "it",
+      nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+      // separateDialCode: true,
+      utilsScript: "{% static 'js/utils.js' %}"
+    });
+    $("#demo").intlTelInput("loadUtils", "lib/libphonenumber/build/utils.js");
+  </script>
 {% endblock %}

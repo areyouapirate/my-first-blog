@@ -8,8 +8,6 @@ import datetime
 from mapwidgets.widgets import GooglePointFieldWidget
 from PIL import Image
 from django.core.files import File
-from phonenumber_field.widgets import PhoneNumberPrefixWidget
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -113,6 +111,8 @@ class InscrForm(forms.ModelForm):
     second_choice = forms.ChoiceField(choices=MY_CHOICES)
     dob_child = forms.DateField(widget=extras.SelectDateWidget(attrs = {
                 'display': 'inline-block',}, years=range(current_year - 18, current_year - 5)))
+    phone_parent = forms.RegexField(regex=r'^\+?1?\d{9,15}$', 
+                                error_message = ("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."))
     class Meta:
         model = Inscription
         fields = ('fn_parent', 'sn_parent', 'fn_child', 'sn_child', 'dob_child', 'phone_parent', 'bio_child', 'first_choice', 'second_choice',)

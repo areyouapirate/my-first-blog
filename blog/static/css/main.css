@@ -518,7 +518,42 @@ h3{
 	line-height: 30px;
 	margin: 50px 50px 50px 50px ;
 	display: block;
+	position: relative;
 }
+
+
+.postdetail .titblank{
+	display: block;
+	position: relative;
+	
+	min-height: 220px;
+	width: 100%;
+	
+}
+
+.postdetail .titblank h1{
+	color: #2d2d2d;
+	margin-top: 90px;
+	margin-bottom: 50px;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	font-family: "open_bold", Helvetica, Arial, sans-serif;
+	font-size: 34px;
+	font-weight: bold;
+	word-break: break-word;
+}
+
+.postdetail .titblank p{
+	color: #2d2d2d;
+	font-family: "open_regular", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 30px;
+	font-weight: bold;
+	margin: 15px 0 35px 0;
+}
+
+.postdetail .date{
+		display: none;
+	}
 
 
 .place{
@@ -533,19 +568,31 @@ h3{
 
 #prof {
 	position: relative;
-	height: 450px;
 	max-width: 370px;
 }
 #login {
 	position: relative;
-	height: 450px;
 	max-width: 370px;
 }
 #signup {
 	position: relative;
 	max-width: 370px;
 }
-.modal {
+#modallogin {
+   max-width: 370px;
+   position: absolute;
+   left: 50%;
+   margin-left: -180px;
+
+}
+#modalprofile {
+   max-width: 370px;
+   position: absolute;
+   left: 50%;
+   margin-left: -180px;
+
+}
+#mdalsignup {
    max-width: 370px;
    position: absolute;
    left: 50%;
@@ -555,7 +602,7 @@ h3{
 
 input[type=text], select {
     width: 100%;
-    max-width: 300px;
+    max-width: 450px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -565,7 +612,7 @@ input[type=text], select {
 }
 input[type=email], select {
     width: 100%;
-    max-width: 300px;
+    max-width: 450px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -575,7 +622,7 @@ input[type=email], select {
 }
 input[type=password], select {
     width: 100%;
-    max-width: 300px;
+    max-width: 450px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -603,6 +650,18 @@ input[type="submit"] {
     padding: 20px;
     font-size: 1.2rem;
 }
+input[type=tel], select {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
 /*		Footer 		*/
 
 
@@ -666,7 +725,20 @@ input[type="submit"] {
 
 @media (max-width: 767px) {
 
-
+	td.col_3{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    }
+	th.col_3{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
 	header{
 	height: 90px;
 	}

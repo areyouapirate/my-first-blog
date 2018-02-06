@@ -6,13 +6,14 @@ from django.dispatch import receiver
 from django.contrib.gis.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+
 class Inscription(models.Model):
     fn_parent = models.CharField(max_length=200)
     sn_parent = models.CharField(max_length=200)
     fn_child = models.CharField(max_length=200)
     sn_child = models.CharField(max_length=200)
     dob_child = models.DateField(null=True, blank=True)
-    phone_parent = PhoneNumberField(default='')
+    phone_parent = models.CharField(max_length=20, default='')
     bio_child = models.TextField(blank=True)
     first_choice = models.CharField(max_length=200)
     second_choice = models.CharField(max_length=200)
@@ -42,7 +43,7 @@ class Post(models.Model):
     nomeautore = models.CharField(max_length=500)
     gruppo = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
-    subtitle = models.CharField(max_length=500)
+    subtitle = models.TextField(max_length=500)
     text = models.TextField()
     approval = models.TextField()
     img = models.ImageField(upload_to='post_img/', blank=True, null=True)
