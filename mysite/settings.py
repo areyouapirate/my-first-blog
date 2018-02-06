@@ -30,8 +30,9 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [ config('ALLOWED_HOSTS') ]
 
-
-
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', cast=bool)
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', cast=bool)
 # Application definition
 
 INSTALLED_APPS = (
