@@ -2,45 +2,52 @@ $(document).ready(function(){
 	$("input").attr("required", true);
 	$("textarea").attr("required", true);
 	$("#id_img").attr("required", false);
-	
 	$("#id_text").attr("rows", '15');
 	$('[data-toggle="tooltip"]').tooltip();
 
+	$(".catastrofe").click(function () {
+   	$("#modalDel").modal("show");
+   	});
+
+   	$(".js-img-remove-old").click(function () {
+   	$("#id_remove_photo").val("True");
+   	$(".old_preview").hide();
+   	});
+
 	$('html').on('touchstart', function(e) {
     $('#jstouch').removeClass('hover');
+	});
 
+	$('#jstouch').on("touchstart", function (e) {
+		e.stopPropagation();
+	    "use strict"; //satisfy the code inspectors
+	    var link = $(this); //preselect the link
+	    if (link.hasClass('hover')) {
+	        return true;
+	    } 
+	    else {
+	        link.addClass("hover");
+	        $('#jstouch').not(this).removeClass("hover");
+	        e.preventDefault();
 
-});
-$('#jstouch').on("touchstart", function (e) {
-	e.stopPropagation();
-    "use strict"; //satisfy the code inspectors
-    var link = $(this); //preselect the link
-    if (link.hasClass('hover')) {
-        return true;
-    } 
-    else {
-        link.addClass("hover");
-        $('#jstouch').not(this).removeClass("hover");
-        e.preventDefault();
-
-        return false; //extra, and to make sure the function has consistent return points
-    }
-});
+	        return false; //extra, and to make sure the function has consistent return points
+	    }
+	});
 
 	$(".profile").click(function () {
     	$("#modalprofile").modal("show");
   	});
+
   	$(".login").click(function () {
     	$("#modallogin").modal("show");
   	});
+
   	$(".signup").click(function () {
     	$("#modalsignup").modal("show");
   	});
-
     
     $('input[name=password2]').keyup(function () {
     'use strict';
-
     if ($('input[name=password1]').val() === $(this).val()) {
         $('#divCheckPasswordMatch').html('Le password coincidono');
         this.setCustomValidity('');
@@ -49,6 +56,7 @@ $('#jstouch').on("touchstart", function (e) {
         this.setCustomValidity('Le password devono coincidere!');
     }
 	});
+
     $("#id_username").keyup(function () {
     	'use strict';
       	var username = $(this).val();
@@ -90,24 +98,11 @@ $('#jstouch').on("touchstart", function (e) {
 	});
 
 
-
-
-
-
-
-
 	//Show & Hide menu on mobile
 	$('.burger_icon').click(function(){
 		$('header nav').toggleClass('show');
 		$('header .burger_icon').toggleClass('active');
 	});
-
-	
-
-
-
-
-
 
 	//wow.js on scroll animations initialization
 	wow = new WOW(
@@ -119,13 +114,6 @@ $('#jstouch').on("touchstart", function (e) {
 	);
 	wow.init();
 
-
-
-
-
-
-
-
 	//parallax effect initialization
 	$('.hero').parallax("50%", 0.3);
 
@@ -135,10 +123,5 @@ $('#jstouch').on("touchstart", function (e) {
 	$('.hero2').parallax("50%", 0.3);
 
 	
-
-
-
-
-
 
 });
