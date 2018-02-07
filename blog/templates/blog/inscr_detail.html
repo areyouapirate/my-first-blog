@@ -1,36 +1,26 @@
 {% extends 'blog/base.html' %}
-
 {% block content %}
-
 <!--  App Features Section  -->
-
-        <div class="container" style="margin-top: 20px;">
-            <div class="place weel">
-                {% if inscr.published_date %}
-                <div class="date">
-                    {{ inscr.published_date }}
-                </div>
-                {% endif %}
-                <h1>{{ inscr.fn_child }} {{ inscr.sn_child }}</h1>
-                <p>Nome Genitore = {{ inscr.fn_parent }} {{ inscr.sn_parent }}</p>
-                <p>Nome Figlio = {{ inscr.fn_child }} {{ inscr.sn_child }}</p>
-                <p>Data di nascita = {{ inscr.dob_child }}</p>
-                <p>Motivazione = {{ inscr.bio_child }}</p>
-                <p>Prima scelta = {{ inscr.first_choice }}</p>
-                <p>Seconda scelta = {{ inscr.second_choice }}</p>
-                {% if inscr.author %}
-                <div class="date">
-                    {{ inscr.author }}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-    <!--  And App Features Section  -->
-
-
-
-
-
-
+<div class="container" style="margin-top: 20px;">
+   <div class="place weel">
+      {% if inscr.published_date %}
+      <div class="date">
+         {{ inscr.published_date }}
+      </div>
+      {% endif %}
+      <h1>{{ inscr.fn_child }} {{ inscr.sn_child }}</h1>
+      <p>Nome Genitore = {{ inscr.fn_parent }} {{ inscr.sn_parent }}</p>
+      <p>Nome Figlio = {{ inscr.fn_child }} {{ inscr.sn_child }}</p>
+      <p>Data di nascita = {{ inscr.dob_child }}</p>
+      <p>Motivazione = {{ inscr.bio_child }}</p>
+      <p>Prima scelta = {{ inscr.first_choice }}</p>
+      <p>Seconda scelta = {{ inscr.second_choice }}</p>
+      {% if inscr.author %}
+      <div class="date">
+         {{ inscr.author }}
+      </div>
+      {% endif %}
+   </div>
+</div>
+<!--  And App Features Section  -->
 {% endblock %}

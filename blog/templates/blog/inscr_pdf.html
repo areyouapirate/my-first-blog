@@ -1,156 +1,153 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-<div>
-  <p>Lista stampata il:       {{ time }}</p>
-  <p>Da: {{ user }}</p>
-</div>
-{% if filter1.qs %}
-    <h1>Prime scelte</h1>
-    <table>
-    <thead>
-      <tr>
-        <th>Anno</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Prima scelta</th>
-        <th>Seconda scelta</th>
-        <th>Recapito</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for Inscription in filter1.qs %}
-        <tr>
-          <td>{{ Inscription.dob_child.year }}</td>
-          <td>{{ Inscription.fn_child }}</td>
-          <td>{{ Inscription.sn_child }}</td>
-          <td>{{ Inscription.first_choice }}</td>
-          <td >{{ Inscription.second_choice }}</td>
-          <td>{{ Inscription.phone_parent }}</td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-{% endif %}
-{% if filter2.qs %}
-    <h1>Seconde scelte</h1>
-    <table>
-    <thead>
-      <tr>
-        <th>Anno</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Prima scelta</th>
-        <th>Seconda scelta</th>
-        <th>Recapito</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for Inscription in filter2.qs %}
-        <tr>
-          <td>{{ Inscription.dob_child.year }}</td>
-          <td>{{ Inscription.fn_child }}</td>
-          <td>{{ Inscription.sn_child }}</td>
-          <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
-          <td>{{ Inscription.phone_parent }}</td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-{% endif %}
-{% if filter0.qs %}
-	<h1>Iscrizioni personali</h1>
-    <table>
-    <thead>
-      <tr>
-        <th>Anno</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Prima scelta</th>
-        <th>Seconda scelta</th>
-        <th>Recapito</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for Inscription in filter0.qs %}
-        <tr>
-          <td>{{ Inscription.dob_child.year }}</td>
-          <td>{{ Inscription.fn_child }}</td>
-          <td>{{ Inscription.sn_child }}</td>
-          <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
-          <td>{{ Inscription.phone_parent }}</td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-{% endif %}
-{% if filter3.qs %}
-    <h1>Tutte le iscrizioni</h1>
-    <table >
-    <thead>
-      <tr>
-        <th>Anno</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Prima scelta</th>
-        <th>Seconda scelta</th>
-        <th>Recapito</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for Inscription in filter3.qs %}
-        <tr>
-          <td>{{ Inscription.dob_child.year }}</td>
-          <td>{{ Inscription.fn_child }}</td>
-          <td>{{ Inscription.sn_child }}</td>
-          <td>{{ Inscription.first_choice }}</td>
-          <td>{{ Inscription.second_choice }}</td>
-          <td>{{ Inscription.phone_parent }}</td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="5">No data</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-{% endif %}
-
-    </div>
-  </div>
-</section>
-</body>
+   <head>
+      <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+         }
+         tr:nth-child(even) {
+         background-color: #dddddd;
+         }
+      </style>
+   </head>
+   <body>
+      <div>
+         <p>Lista stampata il:       {{ time }}</p>
+         <p>Da: {{ user }}</p>
+      </div>
+      {% if filter1.qs %}
+      <h1>Prime scelte</h1>
+      <table>
+         <thead>
+            <tr>
+               <th>Anno</th>
+               <th>Nome</th>
+               <th>Cognome</th>
+               <th>Prima scelta</th>
+               <th>Seconda scelta</th>
+               <th>Recapito</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for Inscription in filter1.qs %}
+            <tr>
+               <td>{{ Inscription.dob_child.year }}</td>
+               <td>{{ Inscription.fn_child }}</td>
+               <td>{{ Inscription.sn_child }}</td>
+               <td>{{ Inscription.first_choice }}</td>
+               <td >{{ Inscription.second_choice }}</td>
+               <td>{{ Inscription.phone_parent }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+               <td colspan="5">No data</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      {% endif %}
+      {% if filter2.qs %}
+      <h1>Seconde scelte</h1>
+      <table>
+         <thead>
+            <tr>
+               <th>Anno</th>
+               <th>Nome</th>
+               <th>Cognome</th>
+               <th>Prima scelta</th>
+               <th>Seconda scelta</th>
+               <th>Recapito</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for Inscription in filter2.qs %}
+            <tr>
+               <td>{{ Inscription.dob_child.year }}</td>
+               <td>{{ Inscription.fn_child }}</td>
+               <td>{{ Inscription.sn_child }}</td>
+               <td>{{ Inscription.first_choice }}</td>
+               <td>{{ Inscription.second_choice }}</td>
+               <td>{{ Inscription.phone_parent }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+               <td colspan="5">No data</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      {% endif %}
+      {% if filter0.qs %}
+      <h1>Iscrizioni personali</h1>
+      <table>
+         <thead>
+            <tr>
+               <th>Anno</th>
+               <th>Nome</th>
+               <th>Cognome</th>
+               <th>Prima scelta</th>
+               <th>Seconda scelta</th>
+               <th>Recapito</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for Inscription in filter0.qs %}
+            <tr>
+               <td>{{ Inscription.dob_child.year }}</td>
+               <td>{{ Inscription.fn_child }}</td>
+               <td>{{ Inscription.sn_child }}</td>
+               <td>{{ Inscription.first_choice }}</td>
+               <td>{{ Inscription.second_choice }}</td>
+               <td>{{ Inscription.phone_parent }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+               <td colspan="5">No data</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      {% endif %}
+      {% if filter3.qs %}
+      <h1>Tutte le iscrizioni</h1>
+      <table >
+         <thead>
+            <tr>
+               <th>Anno</th>
+               <th>Nome</th>
+               <th>Cognome</th>
+               <th>Prima scelta</th>
+               <th>Seconda scelta</th>
+               <th>Recapito</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for Inscription in filter3.qs %}
+            <tr>
+               <td>{{ Inscription.dob_child.year }}</td>
+               <td>{{ Inscription.fn_child }}</td>
+               <td>{{ Inscription.sn_child }}</td>
+               <td>{{ Inscription.first_choice }}</td>
+               <td>{{ Inscription.second_choice }}</td>
+               <td>{{ Inscription.phone_parent }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+               <td colspan="5">No data</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      {% endif %}
+      </div>
+      </div>
+      </section>
+   </body>
 </html>

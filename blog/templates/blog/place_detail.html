@@ -1,63 +1,47 @@
 {% extends 'blog/base.html' %}
 {% block extra_head_content  %}
-<style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
+
 {% endblock  %}
 {% block content %}
-
 <!--  App Features Section  -->
-
-        <div class="container">
-            <div class="weel place">
-                {% if place.published_date %}
-                <div class="date">
-                    {{ place.published_date }}
-                </div>
-                {% endif %}
-                <h1>{{ place.where }}</h1>
-                <p>Tipo = {{ place.typ }}</p>
-                <p>Riscaldamento = {{ place.heat }}</p>
-                <p>Capienza = {{ place.capacity }}</p>
-                <p>Costi = {{ place.cost }}</p>
-                <p>Ultimo gruppo che ha visitato il posto  = {{ place.last_group }}</p>
-                <p>Contatti  = {{ place.contacts }}</p>
-                <p>Descrizione  = {{ place.description }}</p>
-                <div id="map" style="margin-top: 30px;"></div>
-                <script>
-                    function initMap() {
-                        var place = {lat: {{ place.coordinates.y }}, lng: {{ place.coordinates.x }}};
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 12,
-                            center: place
-                        });
-                        var marker = new google.maps.Marker({
-                            position: place,
-                            map: map
-                        });
-                    }
-                </script>
-                <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRU4ZZiIBGj2wkuA-tl6jEl4_i-ndD7DI&callback=initMap">
-                </script>
-                <p>Coordinate = <a href="https://www.google.com/maps/?q={{ place.coordinates.y }},{{ place.coordinates.x }}">  {{ place.coordinates.y }} {{ place.coordinates.x }} </a>
-                {% if place.author %}
-                <div class="date">
-                    {{ place.author }}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-    <!--  And App Features Section  -->
-
-
-
-
-
-
-
+<div class="container">
+   <div class="weel place">
+      {% if place.published_date %}
+      <div class="date">
+         {{ place.published_date }}
+      </div>
+      {% endif %}
+      <h1>{{ place.where }}</h1>
+      <p>Tipo = {{ place.typ }}</p>
+      <p>Riscaldamento = {{ place.heat }}</p>
+      <p>Capienza = {{ place.capacity }}</p>
+      <p>Costi = {{ place.cost }}</p>
+      <p>Ultimo gruppo che ha visitato il posto  = {{ place.last_group }}</p>
+      <p>Contatti  = {{ place.contacts }}</p>
+      <p>Descrizione  = {{ place.description }}</p>
+      <div id="map"></div>
+      <script>
+         function initMap() {
+             var place = {lat: {{ place.coordinates.y }}, lng: {{ place.coordinates.x }}};
+             var map = new google.maps.Map(document.getElementById('map'), {
+                 zoom: 12,
+                 center: place
+             });
+             var marker = new google.maps.Marker({
+                 position: place,
+                 map: map
+             });
+         }
+      </script>
+      <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRU4ZZiIBGj2wkuA-tl6jEl4_i-ndD7DI&callback=initMap"></script>
+      <p>Coordinate = <a href="https://www.google.com/maps/?q={{ place.coordinates.y }},{{ place.coordinates.x }}">  {{ place.coordinates.y }} {{ place.coordinates.x }} </a>
+         {% if place.author %}
+      <div class="date">
+         {{ place.author }}
+      </div>
+      {% endif %}
+   </div>
+</div>
+<!--  And App Features Section  -->
 {% endblock %}

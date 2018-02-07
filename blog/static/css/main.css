@@ -361,7 +361,7 @@
     }
 
     .nd1{
-    	
+
     	right: 260px;
     	top: 40px;
     	animation-delay: 0.2s;
@@ -370,7 +370,7 @@
     }
 
     .nd3{
-    	
+
     	right: 200px;
     	top: 40px;
     	animation-delay: 0.15s;
@@ -379,7 +379,7 @@
     }
 
     .nd4{
-    	
+
     	right: 140px;
     	top: 40px;
     	animation-delay: 0.1s;
@@ -388,7 +388,7 @@
     }
 
     .nd5{
-    	
+
     	background-size: 100%;
     	right: 80px;
     	top: 40px;
@@ -408,12 +408,12 @@
     }
 
     .menu-floating:hover .nds{
-    	
+
     	animation: bounce-nds 0.1s linear;
     	animation-fill-mode:  forwards;
     }
     .menu-floating.hover .nds{
-    	
+
     	animation: bounce-nds 0.1s linear;
     	animation-fill-mode:  forwards;
     }
@@ -507,10 +507,13 @@
     	display: block;
     }
     .postdetail{
-    	min-height: calc(100vh - 700px);
+    	min-height: calc(100vh - 715px);
     	display: block;
     	background: white;
     }
+    #noimg{
+            min-height: calc(100vh - 605px);
+        }
     .postdetail .text{
     	color: #4c4c4c;
     	font-family: "open_regular", Helvetica, Arial, sans-serif;
@@ -527,7 +530,7 @@
     	position: relative;
     	min-height: 220px;
     	width: 100%;
-    	
+
     }
 
     .postdetail .titblank h1{
@@ -566,6 +569,12 @@
     	display: block;
 
     }
+
+    #map {
+   		height: 400px;
+   		width: 100%;
+   		margin-top: 30px;
+   	}
 
     #prof {
     	position: relative;
@@ -679,7 +688,7 @@
     .modfoot .rightbutton{
     	position: relative;
     	right: 30px;
-    	bottom: 30px;
+
     }
 
     .modfoot .right_icon{
@@ -693,7 +702,7 @@
     	-moz-border-radius: 2px;
     	-webkit-border-radius: 2px;
     	border-radius: 2px;
-    	margin: 15px 0px 20px 20px;
+    	margin: 15px 30px 20px 10px;
     }
 
     .modfoot .right_icon:hover{
@@ -708,10 +717,11 @@
     .modfoot .date{
     	position: relative;
     	margin-left: 80px;
+        margin-top: 20px;
     	color: #fff;
     	font-family: "open_regular", Helvetica, Arial, sans-serif;
     	font-size: 16px;
-    	padding: 10px 0px;
+    	
     }
 
 
@@ -723,18 +733,35 @@
     		width: 100%;
     	}
     }
+    @media (max-width: 767px){
 
-    @media (max-width: 767px) {
+        body{
+            padding: 0px;
+            margin: 0px;
+            background: white;
+            background-size: 0;
+            background-attachment: none;
+        }
+
+        
+    }
+
+    @media (max-width: 1230px) {
+
+        #noimg{
+            min-height: calc(100vh - 555px);
+        }
 
 
 
-    	body{
-    		padding: 0px;
-    		margin: 0px;
-    		background: white;
-    		background-size: 0;
-    		background-attachment: none;
-    	}
+
+
+        .postdetail{
+        min-height: calc(100vh - 665px);
+        }
+
+
+    	
 
     	td.col_3{
     		display:none;
@@ -779,6 +806,12 @@
 
 
     	.postdetail .date{
+            position: relative;
+            margin-bottom: 40px;
+            margin-top: 40px;
+            color: #4c4c4c;
+            font-family: "open_regular", Helvetica, Arial, sans-serif;
+            font-size: 16px;
     		display: block;
     	}
     	.modfoot .date{
@@ -843,7 +876,7 @@
     	}
 
 
-    	
+
 
 
 

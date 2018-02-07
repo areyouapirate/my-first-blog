@@ -1,68 +1,55 @@
 {% extends 'blog/base.html' %}
 {% load staticfiles %}
 {% block content %}
-
- <!--  Hero Section  -->
-
-
+<!--  Hero Section  -->
 <section class="hero" id="hero">
-	<div class="container">
-		<div class="caption">
-			<h1 class="text-uppercase  animated wow fadeInLeft">vivi l'avventura</h1>
-			<p class="text-lowercase  animated wow fadeInLeft"> "Si sa, non e' ancor nato chi goda l'avventura guardando il mondo dietro al buco della serratura" </p>
-		</div>			
-	</div>
-
- <!--  Floating Buttons  --> 
-
-
-<div id="jstouch" class="menu-floating">
-  <a href="{% url 'inscr_list' %}"><div class="nd5 nds" data-toggle="tooltip" data-placement="top" title="Iscrizioni" >
-  	<a href="{% url 'inscr_list' %}"><img class="edit" src="{% static 'img/inscr.png' %}"></a>
-  </div>
-  <div class="nd4 nds" data-toggle="tooltip" data-placement="top" data-original-title="Case e Campi">
-  	<a href="{% url 'place_list' %}"><img class="edit" src="{% static 'img/tent.png' %}"></a>
-  </div>
-  <div class="nd3 nds" data-toggle="tooltip" data-placement="top" data-original-title="Nuova Iscrizione">
-  <a href="/inscr/new"><img class="edit" src="{% static 'img/plus.png' %}"></a>
-  </div>
-  <div id="floating-button" data-toggle="tooltip" data-placement="top" data-original-title="Nuovo Post">
-    <img class="plus" src="{% static 'img/dot.png' %}">
-    <a href="{% url 'post_new' %}" ><img class="edit" src="{% static 'img/post.png' %}"></a>
-  </div>
-
-
-<!--  End Floating Buttons  -->
-</div>
+   <div class="container">
+      <div class="caption">
+         <h1 class="text-uppercase  animated wow fadeInLeft">vivi l'avventura</h1>
+         <p class="text-lowercase  animated wow fadeInLeft"> "Si sa, non e' ancor nato chi goda l'avventura guardando il mondo dietro al buco della serratura" </p>
+      </div>
+   </div>
+   <!--  Floating Buttons  --> 
+   <div id="jstouch" class="menu-floating">
+      <a href="{% url 'inscr_list' %}">
+         <div class="nd4 nds" data-toggle="tooltip" data-placement="top" title="Iscrizioni" >
+      <a href="{% url 'inscr_list' %}"><img class="edit" src="{% static 'img/inscr.png' %}"></a>
+      </div>
+      <div class="nd5 nds" data-toggle="tooltip" data-placement="top" data-original-title="Case e Campi">
+         <a href="{% url 'place_list' %}"><img class="edit" src="{% static 'img/tent.png' %}"></a>
+      </div>
+      <div class="nd3 nds" data-toggle="tooltip" data-placement="top" data-original-title="Nuova Iscrizione">
+         <a href="/inscr/new"><img class="edit" src="{% static 'img/plus.png' %}"></a>
+      </div>
+      <div id="floating-button" data-toggle="tooltip" data-placement="top" data-original-title="Nuovo Post">
+         <img class="plus" src="{% static 'img/dot.png' %}">
+         <a href="{% url 'post_new' %}" ><img class="edit" src="{% static 'img/post.png' %}"></a>
+      </div>
+      <!--  End Floating Buttons  -->
+   </div>
 </section>
-
-
 <!--  End Hero Section  -->
-
-
 <div class="container" style="margin-top: 60px;">
-	<div class="flex-row row animated bounceInUp">
-	{% for post in posts %}
-		<div class="col-xs-6 col-sm-4 col-lg-3">
-			<div class="thumbnail">
-				{% if post.img %}
-					<a href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.img.url }}"></a>
-												{% endif %}
-				<div class="caption">
-					<h3>{{ post.title }}</h2>
-					<p class="flex-text text-muted">{{ post.subtitle }} </p>
-					<p><a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
-				</div>
-				<!-- /.caption -->
-			</div>
-			<!-- /.thumbnail -->
-		</div>
-	{% endfor %}
-	</div>
-	<!-- /.flex-row  -->
+   <div class="flex-row row animated bounceInUp">
+      {% for post in posts %}
+      <div class="col-xs-6 col-sm-4 col-lg-3">
+         <div class="thumbnail">
+            {% if post.img %}
+            <a href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.img.url }}"></a>
+            {% endif %}
+            <div class="caption">
+               <h3>
+               {{ post.title }}</h2>
+               <p class="flex-text text-muted">{{ post.subtitle }} </p>
+               <p><a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
+            </div>
+            <!-- /.caption -->
+         </div>
+         <!-- /.thumbnail -->
+      </div>
+      {% endfor %}
+   </div>
+   <!-- /.flex-row  -->
 </div>
 <!-- /.container  -->
-
-
-
 {% endblock %}

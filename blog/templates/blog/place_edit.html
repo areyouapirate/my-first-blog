@@ -2,60 +2,55 @@
 {% load widget_tweaks %}
 {{ form.media }}
 {% block content %}
-
-  <div class="container" style="margin-top: 20px;">
-
-  <form method="POST">{% csrf_token %}
-    <div class="well">
-      <h4 style="margin-top: 0">Nuovo posto</h4>
-      <div class="row flex-row">
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Località</p>        
-          {% render_field form.where class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Tipo</p>
-          {% render_field form.typ class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Riscaldamento</p>
-          {% render_field form.heat class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Posti letto</p>
-          {% render_field form.capacity class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Costi</p>
-          {% render_field form.cost class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-          <p>Ultimo gruppo che ha visitato il posto</p>
-          {% render_field form.last_group class="form-control" %}
-        </div>
-        <div class="form-group col-xs-6 col-sm-4 col-lg-4">
-        	<p>Contatti</p>
-          {% render_field form.contacts class="form-control" %}
-        </div>
-        </div>
-        <div class="row flex-row">
-        <div class="form-group col-xs-12 col-sm-12 col-md-12">
-        	<p>Descrizione</p>
-          {% render_field form.description class="form-control" %}
-        </div>
-        </div>
-        <div class="row flex-row">
-        <div class="form-group col-xs-12 col-sm-12 col-md-12">
-          <p>Coordinate</p>
-          {% render_field form.coordinates class="form-control" %}
-        </div>
+<div class="container" style="margin-top: 20px;">
+   <form method="POST">
+      {% csrf_token %}
+      <div class="well">
+         <h4 style="margin-top: 0">Nuovo posto</h4>
+         <div class="row flex-row">
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Località</p>
+               {% render_field form.where class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Tipo</p>
+               {% render_field form.typ class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Riscaldamento</p>
+               {% render_field form.heat class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Posti letto</p>
+               {% render_field form.capacity class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Costi</p>
+               {% render_field form.cost class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Ultimo gruppo che ha visitato il posto</p>
+               {% render_field form.last_group class="form-control" %}
+            </div>
+            <div class="form-group col-xs-6 col-sm-4 col-lg-4">
+               <p>Contatti</p>
+               {% render_field form.contacts class="form-control" %}
+            </div>
+         </div>
+         <div class="row flex-row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+               <p>Descrizione</p>
+               {% render_field form.description class="form-control" %}
+            </div>
+         </div>
+         <div class="row flex-row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-12">
+               <p>Coordinate</p>
+               {% render_field form.coordinates class="form-control" %}
+            </div>
+         </div>
+         <button type="submit" class="save btn btn-default">Save</button>
       </div>
-      
-      <button type="submit" class="save btn btn-default">Save</button>
-    </div>
-  </form>
-
-  </div>
-
+   </form>
+</div>
 {% endblock %}
-
