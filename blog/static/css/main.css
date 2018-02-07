@@ -733,7 +733,7 @@
     		width: 100%;
     	}
     }
-    @media (max-width: 767px){
+    @media (max-width: 1230px){
 
         body{
             padding: 0px;
@@ -743,10 +743,10 @@
             background-attachment: none;
         }
 
-        
+
     }
 
-    @media (max-width: 1230px) {
+    @media (max-width: 767px) {
 
         #noimg{
             min-height: calc(100vh - 555px);
