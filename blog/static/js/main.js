@@ -8,7 +8,9 @@ $(document).ready(function(){
 	$(".catastrofe").click(function () {
    	$("#modalDel").modal("show");
    	});
-
+	$(".pubb").click(function () {
+   	$("#modalPubb").modal("show");
+   	});
    	$(".js-img-remove-old").click(function () {
    	$("#id_remove_photo").val("True");
    	$(".old_preview").hide();

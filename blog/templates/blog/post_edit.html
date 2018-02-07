@@ -29,6 +29,7 @@
       </div>
    </div>
 </div>
+
 <div class="modal fade" id="modalDel">
    <div class="modal-dialog">
       <div class="modal-content">
@@ -46,7 +47,7 @@
                <button type="button" data-dismiss="modal" class="btn btn-default ">No</button>
             </div>
             {% if post %}
-            <a id href="{% url 'post_remove' pk=post.pk %}"><button type="button" class="btn btn-primary">Si</button></a>
+            <a href="{% url 'post_remove' pk=post.pk %}"><button type="button" class="btn btn-default" style="background: #ff807a;">ELIMINA</button></a>
             {% endif %}
          </div>
       </div>
@@ -56,7 +57,11 @@
    <form method="POST" enctype="multipart/form-data" id="formUpload">
       {% csrf_token %}
       <div class="well">
+         {% if post %}
+         <h4 style="margin-top: 0">Modifica post</h4>
+         {% else %}
          <h4 style="margin-top: 0">Nuovo post</h4>
+         {% endif %}
          <div class="flex-row row">
             <div class="form-group col-xs-5 col-sm-4 col-lg-4">
                <div class="row flex-row" style="margin-left: 0px; margin-right: 0px;">
@@ -74,7 +79,7 @@
             </div>
          </div>
          <div class="row flex-row" style="margin-bottom: 20px;">
-            <div class="form-group col-xs-3 col-sm-5 col-md-4">
+            <div class="form-group col-xs-3 col-sm-5 col-md-4" style="margin-bottom: 50px;">
                <h5>Immagine</h5>
                {% render_field form.img class="form-control" %}
                {% render_field form.remove_photo %}
@@ -91,15 +96,46 @@
             {% if post.img %}
             <div class="form-group col-xs-6 col-sm-5 col-md-4 old_preview">
                <button type="button" class="btn btn-default js-img-remove-old" style="margin-top: 10px;">Rimuovi immagine</button>  
-               <img id="old_preview" src="{{ post.img.url }}" style="max-width: 100%;">
+               <img id="old_preview" src="{{ post.img.url }}" style="max-width: 100%; margin-bottom: 50px;">
             </div>
             {% endif %}
          </div>
-      </div>
-      {% if post %}
-      <button type="button" class="btn btn-default catastrofe" style="background: #ff807a;float: right;">Elimina Post</button>
+         {% if post %}
+      <button type="button" class="btn btn-default catastrofe pull-left" style="background: #ff807a; margin-top: -30px;">Elimina Post</button>
+      <button type="save" class="save btn btn-default pull-right" style=" margin-top: -30px;">Salva modifiche</button>
+      {% else %}
+      {% if request.user.is_staff%}
+      <button type="save" class="save btn btn-default pull-right" style=" margin-top: -30px;">Pubblica</button>
+      {% else %}
+
+      <button type="button" class="save btn btn-default pull-right pubb" style=" margin-top: -30px;">Pubblica</button>
+      {% endif%}
       {% endif %}
-      <button type="save" class="save btn btn-default " style=" margin-bottom: 20px;">Save</button>
+      
+
+      </div>
+      
+</div>
+<div class="modal fade" id="modalPubb">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Stai per pubblicare un Post!</h4>
+         </div>
+         <div class="modal-body">
+            <p> Congratulazioni! Stai per pubblicare un nuovo post! Tuttavia non sara` possibile visualizzarlo finche` un capo del tuo gruppo Scout oppure un amministratore non lo approveranno. Se premi su continua ti mostreremo un' anteprima del tuo post e invieremo una richiesta di approvazione agli amministratori!</p>
+         </div>
+         <div class="modal-footer">
+            <div class="btn-group pull-left" role="group">
+               <button type="button" data-dismiss="modal" class="btn btn-default ">Indietro</button>
+            </div>
+            <button type="save" class="btn btn-default" style="background: #ff807a;">CONTINUA</button>
+         </div>
+      </div>
+   </div>
 </div>
 </form>
 </div>  

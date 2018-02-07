@@ -1,5 +1,11 @@
 {% extends 'blog/base.html' %}
 {% block extra_head_content  %}
+{% load staticfiles %}
+
+{% if not post.approved %}
+<div class="alert"><img style="width: 100%" src="{% static 'img/anteprimapost.png' %}"></div>
+{% endif%}
+
 {% if post.img %}
 <style>
    .hero2{
@@ -25,29 +31,37 @@
    </div>
 </section>
 {% endif %}
-<!--  App Features Section  -->
-<div class="container">
+
+         {% if not post.img %}
+<div class="container postnonimg">
    <div class="postdetail">
       <div >
-         {% if not post.img %}
-         <div class="titblank">
+         <div class="titblank ">
             <h1 class="text-uppercase  animated wow fadeInLeft">{{ post.title }}</h1>
             <p>{{ post.subtitle }}</p>
          </div>
-         <div class="text" id="noimg">
+         <div class="text">
             <p  >{{ post.text|linebreaksbr }}</p>
             <div class="text">
-            {% if post.approval %}
-            <div  >Post approvato da: {{ post.approval }}</div>
-            {% endif %}
-            {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }} 
+                {% if post.approval %}
+                    <div class="approval">
+                        Post approvato da: {{ post.approval }}
+                    </div>
+                {% endif %}
+                {% if post.published_date %}
+                    <div class="date">
+                        {{ post.published_date }} 
+                    </div>
+                {% endif %}
             </div>
-            {% endif %}
          </div>
-         </div>
+      </div>
+   </div>
+</div>
          {% else %}
+<div class="container postimg">
+   <div class="postdetail">
+      <div >
          <div class="text" >
             <p  >{{ post.text|linebreaksbr }}</p>
             <div class="text">
@@ -61,11 +75,12 @@
             {% endif %}
          </div>
          </div>
-         {% endif %}
-
       </div>
    </div>
 </div>
+         {% endif %}
+
+
 <!--  Footer Section  -->
 <div class="modfoot">
     <div class="pull-left">

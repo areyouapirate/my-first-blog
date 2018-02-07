@@ -39,6 +39,7 @@ def post_new(request):
             post.author = request.user
             post.nomeautore = request.user.first_name + ' ' + request.user.last_name
             post.gruppo = request.user.profile.gruppo
+            post.approved = True
             post.published_date = timezone.now()
             post_x = form.cleaned_data.get('x')
             post.save()
@@ -50,6 +51,7 @@ def post_new(request):
             post.author = request.user
             post.nomeautore = request.user.first_name + ' ' + request.user.last_name
             post.gruppo = request.user.profile.gruppo
+            post.approved = False
             post.save()
             if post.img:
                 form.save_img()
@@ -102,7 +104,8 @@ def post_confirm(request, uidb64, pidb64, token):
         user = None
     if user is not None and post_token.check_token(user, token):
         post.published_date = timezone.now()
-        post.approval = user.username
+        post.approval = user.first_name + " " + user.last_name
+        post.approved = True
         post.save()
         return redirect('/')
     else:

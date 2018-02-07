@@ -41,7 +41,8 @@
                <h3>
                {{ post.title }}</h2>
                <p class="flex-text text-muted">{{ post.subtitle }} </p>
-               <p><a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
+               <p><a type="button" class="btn btn-default btn-round"  href="{% url 'post_detail' pk=post.pk %}"><span class="glyphicon glyphicon-chevron-right"></span></a></p>
+               <div class="postlistdate"> {{ post.published_date|date:'D, d N' }} </div>
             </div>
             <!-- /.caption -->
          </div>

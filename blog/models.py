@@ -46,6 +46,7 @@ class Post(models.Model):
     subtitle = models.TextField(max_length=500)
     text = models.TextField()
     approval = models.TextField()
+    approved = models.BooleanField(default=True)
     img = models.ImageField(upload_to='post_img/', blank=True, null=True)
     created_date = models.DateTimeField(
             default=timezone.now)

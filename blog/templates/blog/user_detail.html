@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<div class="container" style="margin-top: 60px;">
+<div class="container verticalnonhero" >
+    <div class="well">
    <div class="flex-row row animated bounceInUp">
       <div class="col-xs-6 col-sm-4 col-lg-3">
          <div class="thumbnail">
@@ -20,7 +21,7 @@
          </div>
       </div>
    </div>
-</div>
+
 {% if context.posts %}
 <h2 style="margin-left: 15px;">Post pubblicati:</h2>
 {% endif %}
@@ -36,7 +37,8 @@
                <h3>
                {{ post.title }}</h2>
                <p class="flex-text text-muted">{{ post.subtitle }} </p>
-               <p><a class="btn btn-primary" href="{% url 'post_detail' pk=post.pk %}">Continua a leggere</a></p>
+                <p><a type="button" class="btn btn-default btn-round"  href="{% url 'post_detail' pk=post.pk %}"><span class="glyphicon glyphicon-chevron-right"></span></a></p>
+               <div class="postlistdate"> {{ post.published_date|date:'D, d N' }} </div>
             </div>
             <!-- /.caption -->
          </div>
@@ -45,5 +47,7 @@
       {% endfor %}
    </div>
    <!-- /.flex-row  -->
+</div>
+</div>
 </div>
 {% endblock %}

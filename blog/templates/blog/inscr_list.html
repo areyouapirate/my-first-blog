@@ -78,7 +78,7 @@
    <form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
    <form method="get">
       <div class="well">
-         <h2 style="margin-top: 0">Filter</h2>
+         <h2 style="margin-top: 0">Filtro</h2>
          <div class="row">
             <div class="form-group col-sm-4 col-md-3">
                Nome
@@ -99,7 +99,9 @@
       </div>
    </form>
    {% else %}
-   <div> Nessun risultato trovato</div>
+   <div class="well">
+   <div class="postdetail"> Nessun risultato trovato</div>
+   </div>
    {% endif %}
    {% if filter1.qs %}
    <h1>Prime scelte</h1>
