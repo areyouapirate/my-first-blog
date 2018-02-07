@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-<div class="container" style="margin-top: 20px;">
+<div class="container verticalnonhero">
    {% if filter1.qs %}
    <form method="post">{% csrf_token %}<button class="btn btn-default pull-right" name="pdf4" type="submit"><span class="glyphicon glyphicon-print"></span> Stampa Tutto</button></form>
    <form method="get">

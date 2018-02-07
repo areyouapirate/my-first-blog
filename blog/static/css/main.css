@@ -722,6 +722,13 @@
     	font-size: 16px;
     	
     }
+    .verticalhero{
+        min-height: calc(100vh - 610px);
+    }
+    .verticalnonhero{
+        min-height: calc(100vh - 150px); 
+        margin-top: 20px;
+    }
 
     @media (min-width: 1500px){
         #blog-container-1{
