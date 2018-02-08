@@ -110,7 +110,6 @@
          <div class="form-group col-xs-6 col-sm-4 col-lg-3">
             <p>Prima scelta:</p>
             <select class="form-control" id="id_first_choice" name="first_choice">
-               <option value="None">Nessuno</option>
                <option value="PT1">Pistoia 1</option>
                <option value="PT2">Pistoia 2</option>
                <option value="PT3">Pistoia 3</option>
@@ -125,7 +124,6 @@
          <div class="form-group col-xs-6 col-sm-4 col-lg-3" style="margin-bottom: 50px;">
             <p>Seconda scelta:</p>
             <select class="form-control" id="id_second_choice" name="second_choice">
-               <option value="None">Nessuno</option>
                <option value="PT1">Pistoia 1</option>
                <option value="PT2">Pistoia 2</option>
                <option value="PT3">Pistoia 3</option>
@@ -138,8 +136,29 @@
             </select>
          </div>
       </div>
-      <button type="submit" class="save btn btn-default pull-right" style="margin-top: -30px;"><span class="glyphicon glyphicon-ok">  Conferma</span></button>
+      <button type="button" class="inscr btn btn-default pull-right" style="margin-top: -30px;"><span class="glyphicon glyphicon-ok">  Conferma</span></button>
    </div>
+<div class="modal fade" id="modalInscr">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Stai per inserire una nuova iscrizione!</h4>
+         </div>
+         <div class="modal-body">
+            <p> Congratulazioni! Stai per iscrivere tuo figlio nelle liste Scout Agesci della zona di Pistoia! Una volta cliccato su continua l'iscrizione sara' registrata e non sara' piu` possibile modificarla, ti preghiamo quindi di ricontrollare tutti i dati prima di procedere!</p>
+         </div>
+         <div class="modal-footer">
+            <div class="btn-group pull-left" role="group">
+               <button type="button" data-dismiss="modal" class="btn btn-default ">Indietro</button>
+            </div>
+            <button type="save" class="btn btn-default" style="background: #ff807a;">CONTINUA</button>
+         </div>
+      </div>
+   </div>
+</div>
 </form>
 </div>
 {% endblock %}

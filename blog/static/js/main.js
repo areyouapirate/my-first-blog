@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	$("input").attr("required", true);
 	$("textarea").attr("required", true);
 	$("#id_img").attr("required", false);
@@ -10,6 +11,9 @@ $(document).ready(function(){
    	});
 	$(".pubb").click(function () {
    	$("#modalPubb").modal("show");
+   	});
+   	$(".inscr").click(function () {
+   	$("#modalInscr").modal("show");
    	});
    	$(".js-img-remove-old").click(function () {
    	$("#id_remove_photo").val("True");
