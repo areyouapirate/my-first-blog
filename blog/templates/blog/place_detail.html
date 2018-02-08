@@ -3,7 +3,7 @@
 
 {% endblock  %}
 {% block content %}
-<!--  App Features Section  -->
+{% load l10n %}
 <div class="container verticalnonhero">
    <div class="weel place">
       {% if place.published_date %}
@@ -22,7 +22,7 @@
       <div id="map"></div>
       <script>
          function initMap() {
-             var place = {lat: {{ place.coordinates.y }}, lng: {{ place.coordinates.x }}};
+             var place = {lat: {{ place.coordinates.y|unlocalize }}, lng: {{ place.coordinates.x|unlocalize }}};
              var map = new google.maps.Map(document.getElementById('map'), {
                  zoom: 12,
                  center: place
@@ -35,7 +35,7 @@
       </script>
       <script async defer
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRU4ZZiIBGj2wkuA-tl6jEl4_i-ndD7DI&callback=initMap"></script>
-      <p>Coordinate = <a href="https://www.google.com/maps/?q={{ place.coordinates.y }},{{ place.coordinates.x }}">  {{ place.coordinates.y }} {{ place.coordinates.x }} </a>
+      <p>Coordinate = <a href="https://www.google.com/maps/?q={{ place.coordinates.y|unlocalize }},{{ place.coordinates.x|unlocalize }}">  {{ place.coordinates.y|unlocalize }} {{ place.coordinates.x|unlocalize }} </a>
          {% if place.author %}
       <div class="date">
          {{ place.author }}

@@ -57,6 +57,12 @@ class Post(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+    def __str__(self):
+        return '%s %s %s %s' % (self.published_date, self.title, self.nomeautore, self.gruppo)
+    def image_tag(self):
+        return u'<img style=" max-width: 400px; width: 100%;" src="%s" />' % (self.img.url)
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
 
 
 class Place(models.Model):

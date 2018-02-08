@@ -139,7 +139,6 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', {'form': form, 'post': post})
 
 @login_required(login_url='/login/')
-
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if (post.gruppo == request.user.profile.gruppo and request.user.is_staff or request.user.is_superuser):

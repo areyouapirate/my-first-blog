@@ -81,7 +81,7 @@
          <div class="row flex-row" style="margin-bottom: 20px;">
             <div class="form-group col-xs-3 col-sm-5 col-md-4" style="margin-bottom: 50px;">
                <h5>Immagine</h5>
-               {% render_field form.img class="form-control" %}
+               <input class="form-control" id="id_img" name="img" type="file" accept='image/*'>
                {% render_field form.remove_photo %}
                {% render_field form.x %}
                {% render_field form.y %}

@@ -10,8 +10,12 @@ class PlaceAdmin(gis_admin.ModelAdmin):
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
     }
+class PostAdmin(admin.ModelAdmin):
+	fields = ('title', 'subtitle', 'text', 'img', 'image_tag', )
+	readonly_fields = ('image_tag',)
 
+        
 
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(Inscription)
 admin.site.register(Place, PlaceAdmin)
