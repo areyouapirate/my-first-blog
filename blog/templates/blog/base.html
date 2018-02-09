@@ -225,6 +225,7 @@
                      {% csrf_token %}
                      <input id="username-field" name="username" type="text" />
                      <input id="password-field" name="password" type="password" />
+                     <a href="{% url 'password_reset' %}"> Ti sei scordato la password?</a> 
                      <div class="modal-footer">
                         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Login </button>
                      </div>
