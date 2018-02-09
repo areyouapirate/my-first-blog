@@ -36,13 +36,13 @@ SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', cast=bool)
 # Application definition
 
 INSTALLED_APPS = (
+    'blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
     'widget_tweaks',
     'django_filters',
     'django.contrib.gis',
